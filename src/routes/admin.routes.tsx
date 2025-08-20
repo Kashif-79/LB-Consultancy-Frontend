@@ -11,6 +11,7 @@ import CreateAdmin from "../pages/Admin/userManagement/CreateAdmin";
 import CreateConsultant from "../pages/Admin/userManagement/CreateConsultant";
 import CreateStudent from "../pages/Admin/userManagement/CreateStudent";
 import StudentData from "../pages/Admin/userManagement/StudentData";
+import StudentDetails from "../pages/Admin/userManagement/StudentDetails";
 
 export const adminPaths = [
   {
@@ -30,6 +31,10 @@ export const adminPaths = [
         name: "Students",
         path: "students-data",
         element: <StudentData />,
+      },
+      {
+        path: "students-data/:stuId",
+        element: <StudentDetails />,
       },
       {
         name: "Create-Consultant",
