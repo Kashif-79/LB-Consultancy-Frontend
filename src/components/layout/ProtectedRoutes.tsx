@@ -1,11 +1,7 @@
 import type { ReactNode } from "react";
 import { useAppSelector } from "../../redux/hooks";
 import { Navigate } from "react-router-dom";
-import {
-  logOut,
-  selectCurrentUser,
-  useCurrentToken,
-} from "../../redux/features/auth/authSlice";
+import { logOut, useCurrentToken } from "../../redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { verifyToken } from "../../utils/verifyToken";
 

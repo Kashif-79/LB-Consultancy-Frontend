@@ -4,15 +4,18 @@ import {
   type SubmitHandler,
 } from "react-hook-form";
 import { Button, Col, Divider, Row } from "antd";
-import { bloodGroupsOptions, gendersOptions } from "../../../types";
+import {
+  bloodGroupsOptions,
+  gendersOptions,
+  type TConsultant,
+  type TResponse,
+} from "../../../types";
 import LBInput from "../../../components/form/LBInput";
 import LBSelect from "../../../components/form/LBSelect";
 import LBDatePicker from "../../../components/form/LBDatePicker";
 import LBForm from "../../../components/form/LBForm";
-import {
-  useAddConsultantMutation,
-  useAddStudentMutation,
-} from "../../../redux/features/admin/userManagement.api";
+import { useAddConsultantMutation } from "../../../redux/features/admin/userManagement.api";
+import { toast } from "sonner";
 
 const ConsultantDefaultValue = {
   name: {
@@ -33,18 +36,25 @@ const ConsultantDefaultValue = {
 const CreateConsultant = () => {
   const [addConsutant] = useAddConsultantMutation();
 
-  //   //   console.log({ data, error });
-
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const toastId = toast.loading("Creating...");
     const consultantData = {
       password: "C111",
       consultant: data,
     };
-    //     // const formData = new FormData();
-    //     // formData.append("data", JSON.stringify(studentData));
-    //     // formData.append("file", data.profileImg);
-
-    addConsutant(consultantData);
+    try {
+      const res = (await addConsutant(
+        consultantData
+      )) as TResponse<TConsultant>;
+      console.log(res);
+      if (res.error) {
+        toast.error(res.error.data.message, { id: toastId });
+      } else {
+        toast.success("Consultant created", { id: toastId });
+      }
+    } catch (err) {
+      toast.error("Something went wrong", { id: toastId });
+    }
 
     console.log(consultantData);
   };

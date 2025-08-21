@@ -4,12 +4,18 @@ import {
   type SubmitHandler,
 } from "react-hook-form";
 import { Button, Col, Divider, Row } from "antd";
-import { bloodGroupsOptions, gendersOptions } from "../../../types";
+import {
+  bloodGroupsOptions,
+  gendersOptions,
+  type TAdmin,
+  type TResponse,
+} from "../../../types";
 import LBInput from "../../../components/form/LBInput";
 import LBSelect from "../../../components/form/LBSelect";
 import LBDatePicker from "../../../components/form/LBDatePicker";
 import LBForm from "../../../components/form/LBForm";
 import { useAddAdminMutation } from "../../../redux/features/admin/userManagement.api";
+import { toast } from "sonner";
 
 const AdminDefaultValue = {
   name: {
@@ -29,16 +35,23 @@ const AdminDefaultValue = {
 
 const CreateAdmin = () => {
   const [addAdmin] = useAddAdminMutation();
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const toastId = toast.loading("Creating...");
     const adminData = {
       password: "A111",
       admin: data,
     };
-    //     //     // const formData = new FormData();
-    //     //     // formData.append("data", JSON.stringify(studentData));
-    //     //     // formData.append("file", data.profileImg);
-
-    addAdmin(adminData);
+    try {
+      const res = (await addAdmin(adminData)) as TResponse<TAdmin>;
+      console.log(res);
+      if (res.error) {
+        toast.error(res.error.data.message, { id: toastId });
+      } else {
+        toast.success("ADMIN created", { id: toastId });
+      }
+    } catch (err) {
+      toast.error("Something went wrong", { id: toastId });
+    }
 
     console.log(adminData);
   };

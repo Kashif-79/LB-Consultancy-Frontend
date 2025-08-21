@@ -5,6 +5,9 @@ import LBSelect from "../../../components/form/LBSelect";
 import LBInput from "../../../components/form/LBInput";
 import { useAddServiceMutation } from "../../../redux/features/admin/serviceManagement.api";
 import { serviceCategoryOptions } from "../../../constants/services";
+import type { TService } from "../../../types/service.types";
+import type { TResponse } from "../../../types";
+import { toast } from "sonner";
 
 const serviceDefault = {
   name: "Interview Coaching",
@@ -15,11 +18,21 @@ const serviceDefault = {
 const CreateService = () => {
   const [addService] = useAddServiceMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const toastId = toast.loading("Creating...");
     const serviceData = {
       service: data,
     };
-    addService(serviceData);
-
+    try {
+      const res = (await addService(serviceData)) as TResponse<TService>;
+      console.log(res);
+      if (res.error) {
+        toast.error(res.error.data.message, { id: toastId });
+      } else {
+        toast.success("Services created", { id: toastId });
+      }
+    } catch (err) {
+      toast.error("Something went wrong", { id: toastId });
+    }
     console.log(serviceData);
   };
 

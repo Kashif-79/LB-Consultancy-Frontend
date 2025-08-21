@@ -8,6 +8,8 @@ import {
 } from "../../../redux/features/admin/CountryManagement.api";
 import LBSelect from "../../../components/form/LBSelect";
 import { programmesOptions } from "../../../constants/university";
+import { toast } from "sonner";
+import type { TResponse, TUniversity } from "../../../types";
 
 const dummyUniversityData = {
   name: "University of Dhaka",
@@ -24,13 +26,25 @@ const CreateUniversity = () => {
     label: item.name,
   }));
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const toastId = toast.loading("Creating...");
     const universityData = {
       ...data,
       ranking: Number(data.ranking),
       tuitionFees: Number(data.tuitionFees),
     };
-    addUniversity(universityData);
-
+    try {
+      const res = (await addUniversity(
+        universityData
+      )) as TResponse<TUniversity>;
+      console.log(res);
+      if (res.error) {
+        toast.error(res.error.data.message, { id: toastId });
+      } else {
+        toast.success("University created", { id: toastId });
+      }
+    } catch (err) {
+      toast.error("Something went wrong", { id: toastId });
+    }
     console.log(universityData);
   };
 

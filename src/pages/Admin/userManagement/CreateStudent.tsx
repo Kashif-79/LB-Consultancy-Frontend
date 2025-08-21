@@ -4,12 +4,19 @@ import {
   type SubmitHandler,
 } from "react-hook-form";
 import { Button, Col, Divider, Row } from "antd";
-import { bloodGroupsOptions, gendersOptions } from "../../../types";
+import {
+  bloodGroupsOptions,
+  gendersOptions,
+  type TResponse,
+  type TStudent,
+} from "../../../types";
 import LBInput from "../../../components/form/LBInput";
 import LBSelect from "../../../components/form/LBSelect";
 import LBDatePicker from "../../../components/form/LBDatePicker";
 import LBForm from "../../../components/form/LBForm";
 import { useAddStudentMutation } from "../../../redux/features/admin/userManagement.api";
+import { toast } from "sonner";
+// import { TResponse } from '../../../types/global';
 
 const studentDefaultValue = {
   name: {
@@ -36,7 +43,7 @@ const studentDefaultValue = {
     motherContactNo: "01888883333",
   },
 
-  localGaurdian: {
+  localGuardian: {
     name: "Mamun Hossain",
     occupation: "Software Engineer",
     contactNo: "01612345678",
@@ -50,21 +57,25 @@ const studentDefaultValue = {
 const CreateStudent = () => {
   const [addStudent] = useAddStudentMutation();
 
-  //   console.log({ data, error });
-
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const toastId = toast.loading("Creating...");
     const studentData = {
       password: "student123",
       student: data,
     };
-    // const formData = new FormData();
-    // formData.append("data", JSON.stringify(studentData));
-    // formData.append("file", data.profileImg);
-
-    addStudent(studentData);
-
-    console.log(studentData);
+    try {
+      const res = (await addStudent(studentData)) as TResponse<TStudent>;
+      console.log(res);
+      if (res.error) {
+        toast.error(res.error.data.message, { id: toastId });
+      } else {
+        toast.success("Student created", { id: toastId });
+      }
+    } catch (err) {
+      toast.error("Something went wrong", { id: toastId });
+    }
   };
+
   return (
     <Row>
       <Col span={24}>
@@ -105,21 +116,6 @@ const CreateStudent = () => {
 
             <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
               <LBSelect label="Gender" name="gender" options={gendersOptions} />
-            </Col>
-            <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-              {/* <Controller
-                name="profileImg"
-                render={({ field: { onChange, value, ...field } }) => (
-                  <Form.Item label="Picture">
-                    <Input
-                      type="file"
-                      value={value?.fileName}
-                      {...field}
-                      onChange={(e) => onChange(e.target.files?.[0])}
-                    />
-                  </Form.Item>
-                )}
-              /> */}
             </Col>
           </Row>
 
@@ -211,14 +207,14 @@ const CreateStudent = () => {
             <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
               <LBInput
                 type="text"
-                name="localGaurdian.name"
+                name="localGuardian.name"
                 label="Local Guardain Name"
               ></LBInput>
             </Col>
             <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
               <LBInput
                 type="text"
-                name="localGaurdian.occupation"
+                name="localGuardian.occupation"
                 label="Occupation"
               ></LBInput>
             </Col>
@@ -226,14 +222,14 @@ const CreateStudent = () => {
             <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
               <LBInput
                 type="text"
-                name="localGaurdian.contactNo"
+                name="localGuardian.contactNo"
                 label="Contact No"
               ></LBInput>
             </Col>
             <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
               <LBInput
                 type="text"
-                name="localGaurdian.address"
+                name="localGuardian.address"
                 label="address"
               ></LBInput>
             </Col>

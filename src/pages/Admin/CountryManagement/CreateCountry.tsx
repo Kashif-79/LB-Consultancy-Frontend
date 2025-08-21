@@ -3,6 +3,8 @@ import type { FieldValues, SubmitHandler } from "react-hook-form";
 import LBForm from "../../../components/form/LBForm";
 import LBInput from "../../../components/form/LBInput";
 import { useAddCountryMutation } from "../../../redux/features/admin/CountryManagement.api";
+import type { TCountry, TResponse } from "../../../types";
+import { toast } from "sonner";
 
 const dummyCountryData = {
   name: "Canada",
@@ -15,11 +17,21 @@ const dummyCountryData = {
 const CreateCountry = () => {
   const [addCountry] = useAddCountryMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const toastId = toast.loading("Creating...");
     const countryData = {
       country: data,
     };
-    addCountry(countryData);
-
+    try {
+      const res = (await addCountry(countryData)) as TResponse<TCountry>;
+      console.log(res);
+      if (res.error) {
+        toast.error(res.error.data.message, { id: toastId });
+      } else {
+        toast.success("Country created", { id: toastId });
+      }
+    } catch (err) {
+      toast.error("Something went wrong", { id: toastId });
+    }
     console.log(countryData);
   };
 
