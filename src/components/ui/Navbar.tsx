@@ -47,7 +47,10 @@ const Navbar = () => {
 
   const menuItems = [
     { key: "home", label: <NavLink to="/">Home</NavLink> },
-    { key: "about", label: <NavLink to="/about">About</NavLink> },
+    {
+      key: "universities",
+      label: <NavLink to="/universities">Universities</NavLink>,
+    },
     {
       key: "services",
       label: (
@@ -91,7 +94,7 @@ const Navbar = () => {
       style={{
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between",
+        justifyContent: "space-around",
         // padding: "0 20px",
         background: "#fff",
         boxShadow: "0 2px 8px #f0f1f2",

@@ -1,15 +1,11 @@
 import { Button, Layout } from "antd";
-import { Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 import Sidebar from "./Sidebar";
 import { useAppDispatch } from "../../redux/hooks";
 import { logOut } from "../../redux/features/auth/authSlice";
 const { Content, Header } = Layout;
 
-const items = Array.from({ length: 5 }).map((_, index) => ({
-  key: index + 1,
-  label: `nav ${index + 1}`,
-}));
 function MainLayout() {
   const dispatch = useAppDispatch();
 

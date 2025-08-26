@@ -5,6 +5,7 @@ import { useCurrentToken } from "../../redux/features/auth/authSlice";
 import { sidebarItemsGenerator } from "../../utils/sidebarItemsGenerator";
 import { adminPaths } from "../../routes/admin.routes";
 import { consultantPaths } from "../../routes/consultant.routes";
+import { Link } from "react-router-dom";
 
 const { Sider } = Layout;
 
@@ -53,7 +54,9 @@ const Sidebar = () => {
           alignItems: "center",
         }}
       >
-        <h1>LB Consultancy</h1>
+        <Link to="/">
+          <h1>LB Consultancy</h1>
+        </Link>
       </div>
       <Menu
         theme="dark"
