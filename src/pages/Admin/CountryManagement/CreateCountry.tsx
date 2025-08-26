@@ -1,4 +1,4 @@
-import { Button, Col, Flex } from "antd";
+import { Button, Col, Flex, Row } from "antd";
 import type { FieldValues, SubmitHandler } from "react-hook-form";
 import LBForm from "../../../components/form/LBForm";
 import LBInput from "../../../components/form/LBInput";
@@ -37,13 +37,25 @@ const CreateCountry = () => {
 
   return (
     <Flex justify="center" align="center">
-      <Col span={6}>
+      <Col span={24}>
         <LBForm onSubmit={onSubmit} defaultValues={dummyCountryData}>
-          <LBInput label="Name" type="text" name="name" />
-          <LBInput label="Code" type="text" name="code" />
-          <LBInput label="Continent" type="text" name="continent" />
-          <LBInput label="Currency" type="text" name="currency" />
-          <LBInput label="language" type="text" name="language" />
+          <Row gutter={8}>
+            <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+              <LBInput label="Name" type="text" name="name" />
+            </Col>
+            <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+              <LBInput label="Code" type="text" name="code" />
+            </Col>
+            <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+              <LBInput label="Continent" type="text" name="continent" />
+            </Col>
+            <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+              <LBInput label="Currency" type="text" name="currency" />
+            </Col>
+            <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+              <LBInput label="language" type="text" name="language" />
+            </Col>
+          </Row>
           <Button htmlType="submit">Submit</Button>
         </LBForm>
       </Col>

@@ -1,19 +1,89 @@
 import { useState } from "react";
 import { Layout, Menu, Button, Drawer, Grid } from "antd";
-import { MenuOutlined } from "@ant-design/icons";
+import { DownOutlined, MenuOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
+import { useGetAllServicesQuery } from "../../redux/features/admin/serviceManagement.api";
+import { useGetAllCountriesQuery } from "../../redux/features/admin/CountryManagement.api";
 
 const { Header } = Layout;
 const { useBreakpoint } = Grid;
 
 const Navbar = () => {
+  const { data: services } = useGetAllServicesQuery(undefined);
+  const { data: country } = useGetAllCountriesQuery(undefined);
   const [open, setOpen] = useState(false);
   const screens = useBreakpoint();
+
+  const serviceOptions =
+    services?.data?.map((item) => ({
+      key: `service-${item._id}`,
+      label: (
+        <NavLink
+          to={`/services/${item._id}`}
+          style={{
+            fontWeight: "normal",
+            fontSize: screens.md ? "18px" : "14px",
+          }}
+        >
+          {item.name}
+        </NavLink>
+      ),
+    })) || [];
+  const countryOptions =
+    country?.data?.map((item) => ({
+      key: `country-${item._id}`,
+      label: (
+        <NavLink
+          to={`/country/${item._id}`}
+          style={{
+            fontWeight: "normal",
+            fontSize: screens.md ? "18px" : "14px",
+          }}
+        >
+          {`Study In ${item.name}`}
+        </NavLink>
+      ),
+    })) || [];
 
   const menuItems = [
     { key: "home", label: <NavLink to="/">Home</NavLink> },
     { key: "about", label: <NavLink to="/about">About</NavLink> },
-    { key: "services", label: <NavLink to="/services">Services</NavLink> },
+    {
+      key: "services",
+      label: (
+        <span
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <div>Our Services</div>
+          <div>
+            <DownOutlined />
+          </div>
+        </span>
+      ),
+      children: serviceOptions,
+    },
+    {
+      key: "country",
+      label: (
+        <span
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <div>Study Abroad</div>
+          <div>
+            <DownOutlined />
+          </div>
+        </span>
+      ),
+      children: countryOptions,
+    },
   ];
 
   return (
@@ -22,19 +92,18 @@ const Navbar = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "0 20px",
+        // padding: "0 20px",
         background: "#fff",
-        // boxShadow: "0 2px 8px #f0f1f2",
+        boxShadow: "0 2px 8px #f0f1f2",
       }}
     >
-      {/* Left side: Logo + Menu */}
       <div style={{ display: "flex", alignItems: "center", flex: 1 }}>
         <div
           style={{
-            fontSize: screens.md ? "20px" : "16px", // ✅ smaller on mobile
+            fontSize: screens.md ? "20px" : "16px",
             fontWeight: "bold",
-            marginRight: screens.md ? "30px" : "10px", // less gap on mobile
-            whiteSpace: "nowrap", // ✅ prevent text from breaking
+            marginRight: screens.md ? "32px" : "10px",
+            whiteSpace: "nowrap",
           }}
         >
           LB Consultancy
@@ -79,7 +148,7 @@ const Navbar = () => {
           >
             <Menu mode="vertical" items={menuItems} />
             <Button type="primary" block style={{ marginTop: "16px" }}>
-              Login
+              <NavLink to="/login">Login</NavLink>
             </Button>
           </Drawer>
         </>

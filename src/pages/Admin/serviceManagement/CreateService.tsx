@@ -1,4 +1,4 @@
-import { Button, Col, Flex } from "antd";
+import { Button, Col, Flex, Row } from "antd";
 import type { FieldValues, SubmitHandler } from "react-hook-form";
 import LBForm from "../../../components/form/LBForm";
 import LBSelect from "../../../components/form/LBSelect";
@@ -38,11 +38,24 @@ const CreateService = () => {
 
   return (
     <Flex justify="center" align="center">
-      <Col span={6}>
+      <Col span={24}>
         <LBForm onSubmit={onSubmit} defaultValues={serviceDefault}>
-          <LBSelect label="Name" name="name" options={serviceCategoryOptions} />
-          <LBInput label="Definition" type="text" name="definition" />
-          <LBInput label="Description" type="text" name="description" />
+          <Row gutter={8}>
+            <Col span={24} md={{ span: 12 }} lg={{ span: 12 }}>
+              <LBSelect
+                label="Name"
+                name="name"
+                options={serviceCategoryOptions}
+              />
+            </Col>
+            <Col span={24} md={{ span: 12 }} lg={{ span: 12 }}>
+              <LBInput label="Definition" type="text" name="definition" />
+            </Col>
+            <Col span={24} md={{ span: 12 }} lg={{ span: 12 }}>
+              <LBInput label="Description" type="text" name="description" />
+            </Col>
+          </Row>
+
           <Button htmlType="submit">Submit</Button>
         </LBForm>
       </Col>

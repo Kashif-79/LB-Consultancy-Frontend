@@ -1,4 +1,4 @@
-import { Button, Col, Flex } from "antd";
+import { Button, Col, Flex, Row } from "antd";
 import type { FieldValues, SubmitHandler } from "react-hook-form";
 import LBForm from "../../../components/form/LBForm";
 import LBInput from "../../../components/form/LBInput";
@@ -50,19 +50,37 @@ const CreateUniversity = () => {
 
   return (
     <Flex justify="center" align="center">
-      <Col span={6}>
+      <Col span={24}>
         <LBForm onSubmit={onSubmit} defaultValues={dummyUniversityData}>
-          <LBInput label="Name" type="text" name="name" />
-          <LBSelect label="Country" name="country" options={countryOptions} />
-          <LBInput label="Website" type="text" name="website" />
-          <LBInput label="ranking" type="text" name="ranking" />
-          <LBInput label="tuitionFees" type="text" name="tuitionFees" />
-          <LBSelect
-            mode="multiple"
-            label="Programmes"
-            name="programs"
-            options={programmesOptions}
-          />
+          <Row gutter={8}>
+            <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+              <LBInput label="Name" type="text" name="name" />
+            </Col>
+            <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+              <LBSelect
+                label="Country"
+                name="country"
+                options={countryOptions}
+              />
+            </Col>
+            <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+              <LBInput label="Website" type="text" name="website" />
+            </Col>
+            <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+              <LBInput label="ranking" type="text" name="ranking" />
+            </Col>
+            <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+              <LBInput label="tuitionFees" type="text" name="tuitionFees" />
+            </Col>
+            <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+              <LBSelect
+                mode="multiple"
+                label="Programmes"
+                name="programs"
+                options={programmesOptions}
+              />
+            </Col>
+          </Row>
 
           <Button htmlType="submit">Submit</Button>
         </LBForm>
