@@ -7,6 +7,7 @@ export type TCountry = {
   language: string;
 };
 export type TUniversity = {
+  _id: string;
   name: string;
   country: TCountry;
   website: string;

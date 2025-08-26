@@ -8,6 +8,9 @@ import { adminPaths } from "./admin.routes";
 import MainLayout from "../components/layout/MainLayout";
 import PublicLayout from "../components/layout/PublicLayout";
 import { consultantPaths } from "./consultant.routes";
+import Universities from "../components/ui/Universities/Universities";
+import ServicesDetails from "../components/ui/Services/ServicesDetails";
+import CountryDetails from "../components/ui/Country/CountryDetails";
 
 const router = createBrowserRouter([
   {
@@ -18,8 +21,19 @@ const router = createBrowserRouter([
         element: <PublicLayout />,
         children: [
           {
-            index: true,
+            path: "/",
             element: <Home />,
+            children: [
+              { path: "/universities", element: <Universities /> },
+              {
+                path: "/country/:id",
+                element: <CountryDetails />,
+              },
+              {
+                path: "/services/:id",
+                element: <ServicesDetails />,
+              },
+            ],
           },
         ],
       },

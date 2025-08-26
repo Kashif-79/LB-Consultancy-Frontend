@@ -27,6 +27,14 @@ const countryManagementApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getSingleCountry: builder.query({
+      query: (id) => {
+        return {
+          url: `/countries/${id}`,
+          method: "GET",
+        };
+      },
+    }),
     addCountry: builder.mutation({
       query: (data) => ({
         url: "/countries/create-country",
@@ -69,6 +77,7 @@ const countryManagementApi = baseApi.injectEndpoints({
 
 export const {
   useGetAllCountriesQuery,
+  useGetSingleCountryQuery,
   useAddCountryMutation,
   useAddUniversityMutation,
   useGetAllUniversitiesQuery,
