@@ -7,10 +7,8 @@ import {
 import { useMemo, useState } from "react";
 
 import type { TQueryParam, TUniversity } from "../../../types";
-import {
-  useGetAllCountriesQuery,
-  useGetAllUniversitiesQuery,
-} from "../../../redux/features/admin/CountryManagement.api";
+import { useGetAllCountriesQuery } from "../../../redux/features/admin/CountryManagement.api";
+import { useGetAllUniversitiesQuery } from "../../../redux/features/admin/universityManagement.api";
 
 export type TTableData = Pick<TUniversity, "name" | "country">;
 

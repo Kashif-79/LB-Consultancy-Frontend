@@ -1,5 +1,5 @@
 import type { TQueryParam, TResponseRedux } from "../../../types";
-import type { TCountry, TUniversity } from "../../../types/country&uni.types";
+import type { TCountry } from "../../../types/country&uni.types";
 import { baseApi } from "../../api/baseApi";
 
 const countryManagementApi = baseApi.injectEndpoints({
@@ -42,36 +42,14 @@ const countryManagementApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
-    getAllUniversities: builder.query({
-      query: (args) => {
-        const params = new URLSearchParams();
-        if (args) {
-          args.forEach((item: TQueryParam) => {
-            params.append(item.name, item.value as string);
-          });
-        }
-
-        return {
-          url: "/universities",
-          method: "GET",
-          params: params,
-        };
-      },
-      transformResponse: (response: TResponseRedux<TUniversity[]>) => {
-        // console.log(response);
-        return {
-          data: response.data,
-          meta: response.meta,
-        };
-      },
-    }),
-    addUniversity: builder.mutation({
-      query: (data) => ({
-        url: "/universities/create-university",
-        method: "POST",
-        body: data,
-      }),
-    }),
+    //  updateSingleCountry: builder.query({
+    //   query: (id) => {
+    //     return {
+    //       url: `/countries/create-country/${id}`,
+    //       method: "PATCH",
+    //     };
+    //   },
+    // }),
   }),
 });
 
@@ -79,6 +57,4 @@ export const {
   useGetAllCountriesQuery,
   useGetSingleCountryQuery,
   useAddCountryMutation,
-  useAddUniversityMutation,
-  useGetAllUniversitiesQuery,
 } = countryManagementApi;

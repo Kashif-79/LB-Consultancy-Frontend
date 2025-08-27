@@ -40,20 +40,33 @@ const CreateCountry = () => {
       <Col span={24}>
         <LBForm onSubmit={onSubmit} defaultValues={dummyCountryData}>
           <Row gutter={8}>
-            <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+            <Col span={24} md={{ span: 24 }} lg={{ span: 24 }}>
               <LBInput label="Name" type="text" name="name" />
             </Col>
-            <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+            <Col span={24} md={{ span: 24 }} lg={{ span: 24 }}>
               <LBInput label="Code" type="text" name="code" />
             </Col>
-            <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+            <Col span={24} md={{ span: 24 }} lg={{ span: 24 }}>
               <LBInput label="Continent" type="text" name="continent" />
             </Col>
-            <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+            <Col span={24} md={{ span: 24 }} lg={{ span: 24 }}>
               <LBInput label="Currency" type="text" name="currency" />
             </Col>
-            <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+            <Col span={24} md={{ span: 24 }} lg={{ span: 24 }}>
               <LBInput label="language" type="text" name="language" />
+            </Col>
+            <Col span={24} md={{ span: 24 }} lg={{ span: 24 }}>
+              <LBInput label="Why Study" type="textarea" name="whyStudy" />
+            </Col>
+            <Col span={24} md={{ span: 24 }} lg={{ span: 24 }}>
+              <LBInput
+                label="Requirements"
+                type="textarea"
+                name="requirements"
+              />
+            </Col>
+            <Col span={24} md={{ span: 12 }} lg={{ span: 24 }}>
+              <LBInput label="Expenses" type="textarea" name="expenses" />
             </Col>
           </Row>
           <Button htmlType="submit">Submit</Button>

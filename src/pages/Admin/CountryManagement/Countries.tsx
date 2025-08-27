@@ -1,5 +1,7 @@
 import {
+  Button,
   Pagination,
+  Space,
   Table,
   type TableColumnsType,
   type TableProps,
@@ -8,6 +10,7 @@ import { useState } from "react";
 
 import type { TCountry, TQueryParam } from "../../../types";
 import { useGetAllCountriesQuery } from "../../../redux/features/admin/CountryManagement.api";
+import { Link } from "react-router-dom";
 
 export type TTableData = Pick<TCountry, "name" | "continent" | "code">;
 
@@ -59,6 +62,21 @@ const CountryData = () => {
           value: "North America",
         },
       ],
+    },
+    {
+      title: "Action",
+      key: "x",
+      render: (item) => {
+        console.log(item);
+        return (
+          <Space>
+            <Link to={`/admin/create-country/${item.key}`}>
+              <Button>Update</Button>
+            </Link>
+          </Space>
+        );
+      },
+      width: "1%",
     },
   ];
 

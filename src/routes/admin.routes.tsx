@@ -90,6 +90,10 @@ export const adminPaths = [
         path: "country-data",
         element: <CountryData />,
       },
+      // {
+      //   path: "country-data/:id",
+      //   element: <CreateCountry />,
+      // },
       {
         name: "Create University",
         path: "create-university",

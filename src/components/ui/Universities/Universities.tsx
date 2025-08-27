@@ -1,7 +1,7 @@
 import PageLayout from "../../layout/PageLayout";
 import img from "../../../assets/images/d-panyukov-_4ZLmHzwARY-unsplash.jpg";
-import { useGetAllUniversitiesQuery } from "../../../redux/features/admin/CountryManagement.api";
 import CardUni from "../../card/CardUni";
+import { useGetAllUniversitiesQuery } from "../../../redux/features/admin/universityManagement.api";
 
 const Universities = () => {
   const { data: universities } = useGetAllUniversitiesQuery(undefined);

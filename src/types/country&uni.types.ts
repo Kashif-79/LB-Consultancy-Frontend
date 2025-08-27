@@ -5,6 +5,9 @@ export type TCountry = {
   continent: string;
   currency: string;
   language: string;
+  whyStudy?: string;
+  requirements?: string;
+  expenses?: string;
 };
 export type TUniversity = {
   _id: string;

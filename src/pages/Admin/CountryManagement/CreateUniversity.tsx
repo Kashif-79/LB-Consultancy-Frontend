@@ -2,14 +2,12 @@ import { Button, Col, Flex, Row } from "antd";
 import type { FieldValues, SubmitHandler } from "react-hook-form";
 import LBForm from "../../../components/form/LBForm";
 import LBInput from "../../../components/form/LBInput";
-import {
-  useAddUniversityMutation,
-  useGetAllCountriesQuery,
-} from "../../../redux/features/admin/CountryManagement.api";
+import { useGetAllCountriesQuery } from "../../../redux/features/admin/CountryManagement.api";
 import LBSelect from "../../../components/form/LBSelect";
 import { programmesOptions } from "../../../constants/university";
 import { toast } from "sonner";
 import type { TResponse, TUniversity } from "../../../types";
+import { useAddUniversityMutation } from "../../../redux/features/admin/universityManagement.api";
 
 const dummyUniversityData = {
   name: "University of Dhaka",
