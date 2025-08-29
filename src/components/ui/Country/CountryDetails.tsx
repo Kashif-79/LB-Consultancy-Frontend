@@ -6,13 +6,74 @@ import PageLayout from "../../layout/PageLayout";
 const CountryDetails = () => {
   const { id } = useParams();
   const { data: country } = useGetSingleCountryQuery(id);
+  console.log(country);
   return (
     <div>
       <PageLayout
         title={`Study In ${country?.data?.name}`}
         backgroundImage={img}
+        layoutType="single"
       >
-        <h3>There should be a Country like NWC</h3>
+        <div>
+          <div>
+            <h2
+              style={{
+                fontWeight: "bold",
+                fontSize: "24px",
+                marginBottom: "16px",
+              }}
+            >
+              Why Study In {country?.data?.name}?
+            </h2>
+            <p
+              style={{
+                fontWeight: "normal",
+                fontSize: "16px",
+                marginBottom: "12px",
+              }}
+            >
+              {country?.data?.whyStudy}
+            </p>
+          </div>
+          <div>
+            <h2
+              style={{
+                fontWeight: "bold",
+                fontSize: "24px",
+                marginBottom: "16px",
+              }}
+            >
+              Requirement For Study in {country?.data?.name}
+            </h2>
+            <p
+              style={{
+                fontSize: "16px",
+                marginBottom: "12px",
+              }}
+            >
+              {country?.data?.requirements}
+            </p>
+          </div>
+          <div>
+            <h2
+              style={{
+                fontWeight: "bold",
+                fontSize: "24px",
+                marginBottom: "16px",
+              }}
+            >
+              Expenses For Study in {country?.data?.name}
+            </h2>
+            <p
+              style={{
+                fontSize: "16px",
+                marginBottom: "12px",
+              }}
+            >
+              {country?.data?.expenses}
+            </p>
+          </div>
+        </div>
       </PageLayout>
     </div>
   );
