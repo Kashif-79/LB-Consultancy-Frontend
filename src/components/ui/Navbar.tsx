@@ -2,33 +2,33 @@ import { useState } from "react";
 import { Layout, Menu, Button, Drawer, Grid } from "antd";
 import { DownOutlined, MenuOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
-import { useGetAllServicesQuery } from "../../redux/features/admin/serviceManagement.api";
+// import { useGetAllServicesQuery } from "../../redux/features/admin/serviceManagement.api";
 import { useGetAllCountriesQuery } from "../../redux/features/admin/CountryManagement.api";
 
 const { Header } = Layout;
 const { useBreakpoint } = Grid;
 
 const Navbar = () => {
-  const { data: services } = useGetAllServicesQuery(undefined);
+  // const { data: service } = useGetAllServicesQuery(undefined);
   const { data: country } = useGetAllCountriesQuery(undefined);
   const [open, setOpen] = useState(false);
   const screens = useBreakpoint();
 
-  const serviceOptions =
-    services?.data?.map((item) => ({
-      key: `service-${item._id}`,
-      label: (
-        <NavLink
-          to={`/services/${item._id}`}
-          style={{
-            fontWeight: "normal",
-            fontSize: screens.md ? "18px" : "14px",
-          }}
-        >
-          {item.name}
-        </NavLink>
-      ),
-    })) || [];
+  // const serviceOptions =
+  //   service?.data?.map((item) => ({
+  //     key: `service-${item._id}`,
+  //     label: (
+  //       <NavLink
+  //         to={`/service/${item._id}`}
+  //         style={{
+  //           fontWeight: "normal",
+  //           fontSize: screens.md ? "18px" : "14px",
+  //         }}
+  //       >
+  //         {item.name}
+  //       </NavLink>
+  //     ),
+  //   })) || [];
   const countryOptions =
     country?.data?.map((item) => ({
       key: `country-${item._id}`,
@@ -51,24 +51,24 @@ const Navbar = () => {
       key: "universities",
       label: <NavLink to="/universities">Universities</NavLink>,
     },
-    {
-      key: "services",
-      label: (
-        <span
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <div>Our Services</div>
-          <div>
-            <DownOutlined />
-          </div>
-        </span>
-      ),
-      children: serviceOptions,
-    },
+    // {
+    //   key: "service",
+    //   label: (
+    //     <span
+    //       style={{
+    //         display: "flex",
+    //         justifyContent: "space-between",
+    //         alignItems: "center",
+    //       }}
+    //     >
+    //       <div>Our Services</div>
+    //       <div>
+    //         <DownOutlined />
+    //       </div>
+    //     </span>
+    //   ),
+    //   children: serviceOptions,
+    // },
     {
       key: "country",
       label: (
@@ -107,6 +107,8 @@ const Navbar = () => {
             fontWeight: "bold",
             marginRight: screens.md ? "32px" : "10px",
             whiteSpace: "nowrap",
+            color: "#318fe7ff",
+            // boxShadow: "0 2px 8px #f0f1f2",
           }}
         >
           LB Consultancy

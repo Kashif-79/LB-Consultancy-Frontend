@@ -70,7 +70,7 @@ const CountryData = () => {
         console.log(item);
         return (
           <Space>
-            <Link to={`/admin/create-country/${item.key}`}>
+            <Link to={`/admin/country-data/${item.key}`}>
               <Button>Update</Button>
             </Link>
           </Space>

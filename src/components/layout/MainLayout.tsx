@@ -1,5 +1,5 @@
 import { Button, Layout } from "antd";
-import { NavLink, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 import Sidebar from "./Sidebar";
 import { useAppDispatch } from "../../redux/hooks";

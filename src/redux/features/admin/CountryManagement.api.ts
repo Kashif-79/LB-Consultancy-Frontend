@@ -42,10 +42,10 @@ const countryManagementApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
-    //  updateSingleCountry: builder.query({
+    // updateSingleCountry: builder.query({
     //   query: (id) => {
     //     return {
-    //       url: `/countries/create-country/${id}`,
+    //       url: `/countries/${id}`,
     //       method: "PATCH",
     //     };
     //   },
@@ -57,4 +57,5 @@ export const {
   useGetAllCountriesQuery,
   useGetSingleCountryQuery,
   useAddCountryMutation,
+  // useUpdateSingleCountryQuery,
 } = countryManagementApi;

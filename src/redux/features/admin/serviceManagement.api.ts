@@ -27,6 +27,14 @@ const serviceManagementApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getSingleService: builder.query({
+      query: (id) => {
+        return {
+          url: `/services/${id}`,
+          method: "GET",
+        };
+      },
+    }),
     addService: builder.mutation({
       query: (data) => ({
         url: "/services/create-service",
@@ -37,5 +45,8 @@ const serviceManagementApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useAddServiceMutation, useGetAllServicesQuery } =
-  serviceManagementApi;
+export const {
+  useAddServiceMutation,
+  useGetAllServicesQuery,
+  useGetSingleServiceQuery,
+} = serviceManagementApi;

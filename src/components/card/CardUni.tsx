@@ -17,7 +17,6 @@ const CardUni: React.FC<InfoCardProps> = ({
   image,
   title,
   description,
-  items = [],
   buttonLabel,
   onButtonClick,
 }) => {
@@ -28,23 +27,18 @@ const CardUni: React.FC<InfoCardProps> = ({
         <img
           alt={title}
           src={image}
-          style={{ height: 180, objectFit: "cover" }}
+          style={{
+            height: 180,
+            objectFit: "cover",
+            border: "1px solid #eee",
+            borderRadius: "8px",
+          }}
         />
       }
       style={{ borderRadius: 8 }}
     >
       <Title level={4}>{title}</Title>
-
       {description && <Paragraph>{description}</Paragraph>}
-
-      {items.length > 0 && (
-        <List
-          size="small"
-          dataSource={items}
-          renderItem={(item) => <List.Item>{item}</List.Item>}
-          style={{ marginBottom: 12 }}
-        />
-      )}
       {buttonLabel && (
         <Button type="primary" block onClick={onButtonClick}>
           {buttonLabel}

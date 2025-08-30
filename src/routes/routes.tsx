@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import Home from "../pages/Home/Home";
+import Home from "../pages/PublicPages/Home/Home";
 import Login from "../pages/Login";
 import ProtectedRoute from "../components/layout/ProtectedRoutes";
 import { routesGenerator } from "../utils/routesGenerator";
@@ -8,9 +8,9 @@ import { adminPaths } from "./admin.routes";
 import MainLayout from "../components/layout/MainLayout";
 import PublicLayout from "../components/layout/PublicLayout";
 import { consultantPaths } from "./consultant.routes";
-import Universities from "../components/ui/Universities/Universities";
-import ServicesDetails from "../components/ui/Services/ServicesDetails";
-import CountryDetails from "../components/ui/Country/CountryDetails";
+import Universities from "../pages/PublicPages/Universities/Universities";
+import CountryDetails from "../pages/PublicPages/Country/CountryDetails";
+// import OurServiceData from "../pages/PublicPages/Service/OurServiceData";
 
 const router = createBrowserRouter([
   {
@@ -23,17 +23,15 @@ const router = createBrowserRouter([
           {
             path: "/",
             element: <Home />,
-            children: [
-              { path: "/universities", element: <Universities /> },
-              {
-                path: "/country/:id",
-                element: <CountryDetails />,
-              },
-              {
-                path: "/services/:id",
-                element: <ServicesDetails />,
-              },
-            ],
+          },
+          { path: "/universities", element: <Universities /> },
+          // {
+          //   path: "/service/:id",
+          //   element: <Serv />,
+          // },
+          {
+            path: "/country/:id",
+            element: <CountryDetails />,
           },
         ],
       },
