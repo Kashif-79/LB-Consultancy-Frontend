@@ -26,6 +26,8 @@ const countryManagementApi = baseApi.injectEndpoints({
           meta: response.meta,
         };
       },
+      // invalidatesTags: ["countries"],
+      providesTags: ["countries"],
     }),
     getSingleCountry: builder.query({
       query: (id) => {

@@ -26,6 +26,7 @@ const serviceManagementApi = baseApi.injectEndpoints({
           meta: response.meta,
         };
       },
+      providesTags: ["services"],
     }),
     getSingleService: builder.query({
       query: (id) => {
@@ -34,6 +35,7 @@ const serviceManagementApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
+      providesTags: ["services"],
     }),
     addService: builder.mutation({
       query: (data) => ({
@@ -41,6 +43,7 @@ const serviceManagementApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["services"],
     }),
     updateService: builder.mutation({
       query: (args) => ({
