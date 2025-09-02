@@ -32,7 +32,8 @@ const ServiceData = () => {
   const metaData = serviceData?.meta;
 
   const tableData = serviceData?.data?.map(
-    ({ name, isActive, definition }) => ({
+    ({ _id, name, isActive, definition }) => ({
+      key: _id,
       name,
       isActive,
       definition,
@@ -72,10 +73,10 @@ const ServiceData = () => {
         console.log(item);
         return (
           <Space>
-            <Link to={`/admin/service-data/${item.key}`}>
-              <Button>Details</Button>
+            <Link to={`/admin/service-data/update/${item.key}`}>
+              <Button>Update</Button>
             </Link>
-            <Button>Update</Button>
+            <Button>Details</Button>
           </Space>
         );
       },

@@ -9,8 +9,12 @@ import {
 import { useState } from "react";
 
 import type { TCountry, TQueryParam } from "../../../types";
-import { useGetAllCountriesQuery } from "../../../redux/features/admin/CountryManagement.api";
+import {
+  useDeleteSingleCountryMutation,
+  useGetAllCountriesQuery,
+} from "../../../redux/features/admin/CountryManagement.api";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 
 export type TTableData = Pick<TCountry, "name" | "continent" | "code">;
 
@@ -19,24 +23,38 @@ const CountryData = () => {
   const [page, setPage] = useState(1);
   const {
     data: countryData,
-    isLoading,
     isFetching,
+    refetch,
   } = useGetAllCountriesQuery([
     { name: "page", value: page },
     { name: "sort", value: "id" },
     ...params,
   ]);
+  const [deleteCountry] = useDeleteSingleCountryMutation();
 
-  console.log({ isLoading, isFetching });
+  const handleDelete = async (id: string) => {
+    const toastId = toast.loading("Deleting...");
+
+    try {
+      await deleteCountry(id);
+      toast.success("Country deleted successfully", { id: toastId });
+      refetch();
+    } catch (err: any) {
+      toast.error(err?.data?.message ?? "Delete failed", { id: toastId });
+    }
+  };
 
   const metaData = countryData?.meta;
 
-  const tableData = countryData?.data?.map(({ name, code, continent }) => ({
-    name,
-    code,
-    continent,
-  }));
-
+  const tableData = countryData?.data
+    ?.filter((item) => !item.isDeleted) // remove deleted rows
+    .map(({ _id, name, code, continent, isDeleted }) => ({
+      key: _id,
+      name,
+      code,
+      continent,
+      isDeleted,
+    }));
   const columns: TableColumnsType<TTableData> = [
     {
       title: "Name",
@@ -67,12 +85,12 @@ const CountryData = () => {
       title: "Action",
       key: "x",
       render: (item) => {
-        console.log(item);
         return (
           <Space>
-            <Link to={`/admin/country-data/${item.key}`}>
+            <Link to={`/admin/countries-data/update/${item.key}`}>
               <Button>Update</Button>
             </Link>
+            <Button onClick={() => handleDelete(item.key)}>Delete</Button>
           </Space>
         );
       },

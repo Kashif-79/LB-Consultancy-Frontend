@@ -6,6 +6,7 @@ import UniversityData from "../pages/Admin/CountryManagement/Universities";
 import UpdateCountry from "../pages/Admin/CountryManagement/UpdateCountry";
 import CreateService from "../pages/Admin/serviceManagement/CreateService";
 import ServiceData from "../pages/Admin/serviceManagement/Service";
+import UpdateService from "../pages/Admin/serviceManagement/UpdateService";
 import AdminData from "../pages/Admin/userManagement/AdminData";
 import ConsultantData from "../pages/Admin/userManagement/ConsultantData";
 import CreateAdmin from "../pages/Admin/userManagement/CreateAdmin";
@@ -76,6 +77,10 @@ export const adminPaths = [
         path: "service-data",
         element: <ServiceData />,
       },
+      {
+        path: "service-data/update/:id",
+        element: <UpdateService />,
+      },
     ],
   },
   {
@@ -88,17 +93,17 @@ export const adminPaths = [
       },
       {
         name: "Countries",
-        path: "country-data",
+        path: "countries-data",
         element: <CountryData />,
+      },
+      {
+        path: "countries-data/update/:id",
+        element: <UpdateCountry />,
       },
       {
         name: "Create University",
         path: "create-university",
         element: <CreateUniversity />,
-      },
-      {
-        path: "country-data/:id",
-        element: <UpdateCountry />,
       },
       {
         name: "Universities",

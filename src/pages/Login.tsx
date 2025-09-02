@@ -45,13 +45,27 @@ const Login = () => {
   };
 
   return (
-    <Row justify="center" align="middle" style={{ height: "100vh" }}>
-      <LBForm onSubmit={onSubmit} defaultValues={defaultValues}>
-        <LBInput type="text" name="email" label="email" />
-        <LBInput type="text" name="password" label="Password" />
-        <Button htmlType="submit">Login</Button>
-      </LBForm>
+    <Row
+      justify="center"
+      align="middle"
+      style={{ height: "100vh", background: "#f0f2f5" }}
+    >
+      <div
+        style={{
+          border: "1px solid #ccc",
+          padding: "40px 20px",
+          borderRadius: "8px",
+        }}
+      >
+        <LBForm onSubmit={onSubmit} defaultValues={defaultValues}>
+          <LBInput type="text" name="email" label="email" />
+          <LBInput type="text" name="password" label="Password" />
+          <Button htmlType="submit">Login</Button>
+        </LBForm>
+      </div>
     </Row>
+
+   
   );
 };
 

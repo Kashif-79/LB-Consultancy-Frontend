@@ -30,11 +30,14 @@ const ConsultantData = () => {
 
   const metaData = consultantData?.meta;
 
-  const tableData = consultantData?.data?.map(({ email, contactNo, name }) => ({
-    email,
-    name: name.firstName,
-    contactNo,
-  }));
+  const tableData = consultantData?.data?.map(
+    ({ _id, email, contactNo, name }) => ({
+      key: _id,
+      email,
+      name: name.firstName,
+      contactNo,
+    })
+  );
 
   const columns: TableColumnsType<TTableData> = [
     {
@@ -54,15 +57,17 @@ const ConsultantData = () => {
     },
     {
       title: "Action",
-      key: "x",
+      key: "action",
       render: (item) => {
         console.log(item);
         return (
           <Space>
-            <Link to={`/admin/consultant-data/${item.key}`}>
+            <Link to={`/admin/consultants-data/${item.key}`}>
               <Button>Details</Button>
             </Link>
-            <Button>Update</Button>
+            <Link to={`/admin/consultants-data/${item.key}`}>
+              <Button>Update</Button>
+            </Link>
           </Space>
         );
       },

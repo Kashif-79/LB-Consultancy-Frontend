@@ -8,6 +8,7 @@ export type TCountry = {
   whyStudy?: string;
   requirements?: string;
   expenses?: string;
+  isDeleted?: boolean;
 };
 export type TUniversity = {
   _id: string;

@@ -35,6 +35,14 @@ const countryManagementApi = baseApi.injectEndpoints({
         };
       },
     }),
+
+    deleteSingleCountry: builder.mutation({
+      query: (id) => ({
+        url: `/countries/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["countries"],
+    }),
     addCountry: builder.mutation({
       query: (data) => ({
         url: "/countries/create-country",
@@ -42,14 +50,14 @@ const countryManagementApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
-    // updateSingleCountry: builder.query({
-    //   query: (id) => {
-    //     return {
-    //       url: `/countries/${id}`,
-    //       method: "PATCH",
-    //     };
-    //   },
-    // }),
+    updateCountry: builder.mutation({
+      query: (args) => ({
+        url: `/countries/${args.id}`,
+        method: "PATCH",
+        body: args.data,
+      }),
+      invalidatesTags: ["countries"],
+    }),
   }),
 });
 
@@ -57,5 +65,6 @@ export const {
   useGetAllCountriesQuery,
   useGetSingleCountryQuery,
   useAddCountryMutation,
-  // useUpdateSingleCountryQuery,
+  useUpdateCountryMutation,
+  useDeleteSingleCountryMutation,
 } = countryManagementApi;

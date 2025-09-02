@@ -4,6 +4,7 @@ import { Button } from "antd";
 import HeaderSection from "../../../components/ui/PublicLayoutComponents/HeaderSection";
 import SectionTitle from "../../../components/ui/PublicLayoutComponents/SectionTitle";
 import CardSection from "../../../components/ui/PublicLayoutComponents/CardSection";
+import { Link } from "react-router-dom";
 const Home = () => {
   const { data: countries } = useGetAllCountriesQuery(undefined);
   const cards = countries?.data?.map((country) => ({
@@ -34,16 +35,18 @@ const Home = () => {
             title="We’re Here to Help You"
             description="We don’t just give the consultancy but we give care to your future."
           />
-          <Button
-            type="primary"
-            style={{
-              padding: "12px 24px",
-              fontSize: "16px",
-              fontWeight: "bold",
-            }}
-          >
-            Check Your Eligibility
-          </Button>
+          <Link to="/eligibility">
+            <Button
+              type="primary"
+              style={{
+                padding: "12px 24px",
+                fontSize: "16px",
+                fontWeight: "bold",
+              }}
+            >
+              Check Your Eligibility
+            </Button>
+          </Link>
         </div>
       </section>
     </div>

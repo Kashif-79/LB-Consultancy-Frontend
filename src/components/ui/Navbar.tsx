@@ -30,20 +30,22 @@ const Navbar = () => {
   //     ),
   //   })) || [];
   const countryOptions =
-    country?.data?.map((item) => ({
-      key: `country-${item._id}`,
-      label: (
-        <NavLink
-          to={`/country/${item._id}`}
-          style={{
-            fontWeight: "normal",
-            fontSize: screens.md ? "18px" : "14px",
-          }}
-        >
-          {`Study In ${item.name}`}
-        </NavLink>
-      ),
-    })) || [];
+    country?.data
+      ?.filter((item) => !item.isDeleted) // remove deleted rows
+      .map((item) => ({
+        key: `country-${item._id}`,
+        label: (
+          <NavLink
+            to={`/country/${item._id}`}
+            style={{
+              fontWeight: "normal",
+              fontSize: screens.md ? "18px" : "14px",
+            }}
+          >
+            {`Study In ${item.name}`}
+          </NavLink>
+        ),
+      })) || [];
 
   const menuItems = [
     { key: "home", label: <NavLink to="/">Home</NavLink> },

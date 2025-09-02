@@ -42,6 +42,14 @@ const serviceManagementApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+    updateService: builder.mutation({
+      query: (args) => ({
+        url: `/services/${args.id}`,
+        method: "PATCH",
+        body: args.data,
+      }),
+      invalidatesTags: ["services"],
+    }),
   }),
 });
 
@@ -49,4 +57,5 @@ export const {
   useAddServiceMutation,
   useGetAllServicesQuery,
   useGetSingleServiceQuery,
+  useUpdateServiceMutation,
 } = serviceManagementApi;

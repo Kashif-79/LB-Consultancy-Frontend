@@ -51,6 +51,7 @@ export type TStudent = {
 };
 
 export type TConsultant = {
+  _id: string;
   name: TName;
   gender: "male" | "female" | "other";
   email: string;
@@ -62,6 +63,7 @@ export type TConsultant = {
   isDeleted: boolean;
 };
 export type TAdmin = {
+  _id: string;
   name: TName;
   gender: "male" | "female" | "other";
   email: string;

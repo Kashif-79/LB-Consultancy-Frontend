@@ -60,7 +60,7 @@ const AdminData = () => {
         console.log(item);
         return (
           <Space>
-            <Link to={`/admin/consultant-data/${item.key}`}>
+            <Link to={`/admin/admins-data/${item.key}`}>
               <Button>Details</Button>
             </Link>
             <Button>Update</Button>
