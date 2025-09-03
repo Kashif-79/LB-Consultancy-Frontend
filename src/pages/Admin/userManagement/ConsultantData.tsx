@@ -11,7 +11,7 @@ import { useGetAllConsultantsQuery } from "../../../redux/features/admin/userMan
 import { Link } from "react-router-dom";
 import type { TConsultant, TQueryParam } from "../../../types";
 
-export type TTableData = Pick<TConsultant, "email" | "contactNo" | "name">;
+export type TTableData = Pick<TConsultant, "email" | "contactNo">;
 
 const ConsultantData = () => {
   const [params, setParams] = useState<TQueryParam[]>([]);
@@ -65,7 +65,7 @@ const ConsultantData = () => {
             <Link to={`/admin/consultants-data/${item.key}`}>
               <Button>Details</Button>
             </Link>
-            <Link to={`/admin/consultants-data/${item.key}`}>
+            <Link to={`/admin/consultants-data/update/${item.key}`}>
               <Button>Update</Button>
             </Link>
           </Space>

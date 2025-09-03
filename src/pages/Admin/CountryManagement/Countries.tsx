@@ -47,8 +47,8 @@ const CountryData = () => {
   const metaData = countryData?.meta;
 
   const tableData = countryData?.data
-    ?.filter((item) => !item.isDeleted) // remove deleted rows
-    .map(({ _id, name, code, continent, isDeleted }) => ({
+    ?.filter((item) => !item.isDeleted)
+    ?.map(({ _id, name, code, continent, isDeleted }) => ({
       key: _id,
       name,
       code,
@@ -78,6 +78,10 @@ const CountryData = () => {
         {
           text: "North America",
           value: "North America",
+        },
+        {
+          text: "Europe",
+          value: "Europe",
         },
       ],
     },

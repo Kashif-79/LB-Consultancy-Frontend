@@ -7,10 +7,12 @@ import CardSection from "../../../components/ui/PublicLayoutComponents/CardSecti
 import { Link } from "react-router-dom";
 const Home = () => {
   const { data: countries } = useGetAllCountriesQuery(undefined);
-  const cards = countries?.data?.map((country) => ({
-    title: country.name,
-    description: `Study in the ${country.name} and experience a world-renowned education system. The ${country.name} is an ideal destination for students.`,
-  }));
+  const cards = countries?.data
+    ?.filter((country) => !country.isDeleted)
+    .map((country) => ({
+      title: country.name,
+      description: `Study in the ${country.name} and experience a world-renowned education system. The ${country.name} is an ideal destination for students.`,
+    }));
   return (
     <div>
       <section>

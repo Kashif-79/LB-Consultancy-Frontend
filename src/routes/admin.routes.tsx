@@ -1,8 +1,8 @@
 import AdminDashBoard from "../pages/Admin/AdminDashBoard";
 import CountryData from "../pages/Admin/CountryManagement/Countries";
 import CreateCountry from "../pages/Admin/CountryManagement/CreateCountry";
-import CreateUniversity from "../pages/Admin/CountryManagement/CreateUniversity";
-import UniversityData from "../pages/Admin/CountryManagement/Universities";
+import CreateUniversity from "../pages/Admin/universityManagement/CreateUniversity";
+import UniversityData from "../pages/Admin/universityManagement/Universities";
 import UpdateCountry from "../pages/Admin/CountryManagement/UpdateCountry";
 import CreateService from "../pages/Admin/serviceManagement/CreateService";
 import ServiceData from "../pages/Admin/serviceManagement/Service";
@@ -14,6 +14,11 @@ import CreateConsultant from "../pages/Admin/userManagement/CreateConsultant";
 import CreateStudent from "../pages/Admin/userManagement/CreateStudent";
 import StudentData from "../pages/Admin/userManagement/StudentData";
 import StudentDetails from "../pages/Admin/userManagement/StudentDetails";
+import ConsultantsDetails from "../pages/Admin/userManagement/ConsultantsDetails";
+import AdminDetails from "../pages/Admin/userManagement/AdminDetails";
+import UpdateStudent from "../pages/Admin/userManagement/UpdateStudent";
+import UpdateConsultant from "../pages/Admin/userManagement/UpdateConsultant";
+import UpdateAdmin from "../pages/Admin/userManagement/UpdateAdmin";
 
 export const adminPaths = [
   {
@@ -39,6 +44,10 @@ export const adminPaths = [
         element: <StudentDetails />,
       },
       {
+        path: "students-data/update/:id",
+        element: <UpdateStudent />,
+      },
+      {
         name: "Create-Consultant",
         path: "create-consultant",
         element: <CreateConsultant />,
@@ -47,6 +56,14 @@ export const adminPaths = [
         name: "Consultants",
         path: "consultants-data",
         element: <ConsultantData />,
+      },
+      {
+        path: "consultants-data/:id",
+        element: <ConsultantsDetails />,
+      },
+      {
+        path: "consultants-data/update/:id",
+        element: <UpdateConsultant />,
       },
       {
         name: "Create-Admin",
@@ -58,10 +75,14 @@ export const adminPaths = [
         path: "admins-data",
         element: <AdminData />,
       },
-      //   {
-      //     path: "student-data/:studentId",
-      //     element: <StudentDetails />,
-      //   },
+      {
+        path: "admins-data/:id",
+        element: <AdminDetails />,
+      },
+      {
+        path: "admins-data/update/:id",
+        element: <UpdateAdmin />,
+      },
     ],
   },
   {
@@ -100,6 +121,11 @@ export const adminPaths = [
         path: "countries-data/update/:id",
         element: <UpdateCountry />,
       },
+    ],
+  },
+  {
+    name: "University Management",
+    children: [
       {
         name: "Create University",
         path: "create-university",

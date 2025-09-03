@@ -8,8 +8,8 @@ const Universities = () => {
   const { data: universities } = useGetAllUniversitiesQuery(undefined);
   const cards = universities?.data?.map((university) => ({
     title: university.name,
-    // description: university.ranking,
-    image: university.name,
+    description: university?.name,
+    // image: university.name,
   }));
   return (
     <div>
@@ -21,7 +21,7 @@ const Universities = () => {
         title="Top Universities List to Study Abroad"
         description="Explore the best universities around the world."
       />
-      <CardSection cards={cards || []} variant="default" />
+      <CardSection cards={cards || []} variant="home" />
     </div>
   );
 };

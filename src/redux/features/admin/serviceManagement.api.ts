@@ -20,7 +20,6 @@ const serviceManagementApi = baseApi.injectEndpoints({
         };
       },
       transformResponse: (response: TResponseRedux<TService[]>) => {
-        // console.log(response);
         return {
           data: response.data,
           meta: response.meta,

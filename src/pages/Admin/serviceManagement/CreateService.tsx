@@ -9,12 +9,6 @@ import type { TService } from "../../../types/service.types";
 import type { TResponse } from "../../../types";
 import { toast } from "sonner";
 
-const serviceDefault = {
-  name: "Interview Coaching",
-  definition: "Training for academic or visa interviews.",
-  description:
-    "Through mock interviews and constructive feedback, we prepare you to answer questions confidently, present yourself professionally, and make a strong impression during your interview.",
-};
 const CreateService = () => {
   const [addService] = useAddServiceMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -39,7 +33,7 @@ const CreateService = () => {
   return (
     <Flex justify="center" align="center">
       <Col span={24}>
-        <LBForm onSubmit={onSubmit} defaultValues={serviceDefault}>
+        <LBForm onSubmit={onSubmit}>
           <Row gutter={8}>
             <Col span={24} md={{ span: 12 }} lg={{ span: 12 }}>
               <LBSelect
@@ -52,7 +46,7 @@ const CreateService = () => {
               <LBInput label="Definition" type="text" name="definition" />
             </Col>
             <Col span={24} md={{ span: 12 }} lg={{ span: 12 }}>
-              <LBInput label="Description" type="text" name="description" />
+              <LBInput label="Description" type="textarea" name="description" />
             </Col>
           </Row>
 

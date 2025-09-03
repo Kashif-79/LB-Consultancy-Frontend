@@ -20,13 +20,11 @@ const countryManagementApi = baseApi.injectEndpoints({
         };
       },
       transformResponse: (response: TResponseRedux<TCountry[]>) => {
-        // console.log(response);
         return {
           data: response.data,
           meta: response.meta,
         };
       },
-      // invalidatesTags: ["countries"],
       providesTags: ["countries"],
     }),
     getSingleCountry: builder.query({
@@ -36,8 +34,8 @@ const countryManagementApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
+      providesTags: ["countries"],
     }),
-
     deleteSingleCountry: builder.mutation({
       query: (id) => ({
         url: `/countries/${id}`,
@@ -51,6 +49,7 @@ const countryManagementApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["countries"],
     }),
     updateCountry: builder.mutation({
       query: (args) => ({

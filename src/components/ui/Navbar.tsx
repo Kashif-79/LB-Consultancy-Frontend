@@ -9,29 +9,13 @@ const { Header } = Layout;
 const { useBreakpoint } = Grid;
 
 const Navbar = () => {
-  // const { data: service } = useGetAllServicesQuery(undefined);
   const { data: country } = useGetAllCountriesQuery(undefined);
   const [open, setOpen] = useState(false);
   const screens = useBreakpoint();
 
-  // const serviceOptions =
-  //   service?.data?.map((item) => ({
-  //     key: `service-${item._id}`,
-  //     label: (
-  //       <NavLink
-  //         to={`/service/${item._id}`}
-  //         style={{
-  //           fontWeight: "normal",
-  //           fontSize: screens.md ? "18px" : "14px",
-  //         }}
-  //       >
-  //         {item.name}
-  //       </NavLink>
-  //     ),
-  //   })) || [];
   const countryOptions =
     country?.data
-      ?.filter((item) => !item.isDeleted) // remove deleted rows
+      ?.filter((item) => !item.isDeleted)
       .map((item) => ({
         key: `country-${item._id}`,
         label: (
@@ -53,24 +37,6 @@ const Navbar = () => {
       key: "universities",
       label: <NavLink to="/universities">Universities</NavLink>,
     },
-    // {
-    //   key: "service",
-    //   label: (
-    //     <span
-    //       style={{
-    //         display: "flex",
-    //         justifyContent: "space-between",
-    //         alignItems: "center",
-    //       }}
-    //     >
-    //       <div>Our Services</div>
-    //       <div>
-    //         <DownOutlined />
-    //       </div>
-    //     </span>
-    //   ),
-    //   children: serviceOptions,
-    // },
     {
       key: "country",
       label: (

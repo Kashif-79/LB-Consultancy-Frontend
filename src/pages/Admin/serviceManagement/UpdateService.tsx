@@ -18,7 +18,7 @@ const UpdateService = () => {
   const [updateService] = useUpdateServiceMutation();
 
   const serviceData = {
-    // name: service?.data.name,
+    name: service?.data.name,
     definition: service?.data.definition,
     description: service?.data.description,
   };

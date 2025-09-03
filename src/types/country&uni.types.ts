@@ -19,4 +19,5 @@ export type TUniversity = {
   admissionOpen?: boolean;
   tuitionFees?: number;
   programs: ("UG" | "PG" | "PHD" | "Diploma")[];
+  isDeleted?: boolean;
 };

@@ -1,67 +1,57 @@
+import { useNavigate, useParams } from "react-router-dom";
 import {
-  //   Controller,
-  type FieldValues,
-  type SubmitHandler,
-} from "react-hook-form";
+  useGetSingleConsultantQuery,
+  useUpdateConsultantsMutation,
+} from "../../../redux/features/admin/userManagement.api";
+import type { FieldValues, SubmitHandler } from "react-hook-form";
 import { Button, Col, Divider, Row } from "antd";
-import {
-  bloodGroupsOptions,
-  gendersOptions,
-  type TConsultant,
-  type TResponse,
-} from "../../../types";
+import { bloodGroupsOptions, gendersOptions } from "../../../types";
 import LBInput from "../../../components/form/LBInput";
 import LBSelect from "../../../components/form/LBSelect";
 import LBDatePicker from "../../../components/form/LBDatePicker";
 import LBForm from "../../../components/form/LBForm";
-import { useAddConsultantMutation } from "../../../redux/features/admin/userManagement.api";
 import { toast } from "sonner";
 
-const ConsultantDefaultValue = {
-  name: {
-    firstName: "Kashif",
-    middleName: "Ahmed",
-    lastName: "Hossain",
-  },
-  gender: "male",
-  email: "kashif@example.com",
-  contactNo: "+8801712345678",
-  emergencyContactNo: "+8801987654321",
-  bloodGroup: "B+",
-  presentAddress: "123 Green Road, Dhaka, Bangladesh",
-  permanentAddress: "Village Road, Cumilla, Bangladesh",
-  isDeleted: false,
-};
+const UpdateConsultant = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { data: consultant, refetch } = useGetSingleConsultantQuery(id);
+  const [updateConsultant] = useUpdateConsultantsMutation();
 
-const CreateConsultant = () => {
-  const [addConsutant] = useAddConsultantMutation();
+  const consultantData = {
+    name: consultant?.data?.name,
+    gender: consultant?.data?.gender,
+    bloodGroup: consultant?.data?.bloodGroup,
+    email: consultant?.data?.email,
+    contactNo: consultant?.data?.contactNo,
+    emergencyContactNo: consultant?.data?.emergencyContactNo,
+    presentAddress: consultant?.data?.presentAddress,
+    permanentAddress: consultant?.data?.permanentAddress,
+  };
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const toastId = toast.loading("Creating...");
-    const consultantData = {
-      password: "C111",
-      consultant: data,
+    const updateData = {
+      id,
+      data: {
+        consultant: data,
+      },
     };
+    const toastId = toast.loading("Updating...");
     try {
-      const res = (await addConsutant(
-        consultantData
-      )) as TResponse<TConsultant>;
-      console.log(res);
-      if (res.error) {
-        toast.error(res.error.data.message, { id: toastId });
-      } else {
-        toast.success("Consultant created", { id: toastId });
-      }
-    } catch (err) {
-      toast.error("Something went wrong", { id: toastId });
+      await updateConsultant(updateData);
+      refetch();
+      navigate(-1);
+      toast.success("Consultant updated successfully", { id: toastId });
+    } catch (err: any) {
+      toast.error(err?.data?.message ?? "Update failed", { id: toastId });
     }
-
-    console.log(consultantData);
+    console.log("updateData", updateData);
   };
+
   return (
     <Row>
       <Col span={24}>
-        <LBForm onSubmit={onSubmit} defaultValues={ConsultantDefaultValue}>
+        <LBForm onSubmit={onSubmit} defaultValues={consultantData}>
           <Divider>Personal Info</Divider>
           <Row gutter={8}>
             <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
@@ -144,4 +134,4 @@ const CreateConsultant = () => {
   );
 };
 
-export default CreateConsultant;
+export default UpdateConsultant;

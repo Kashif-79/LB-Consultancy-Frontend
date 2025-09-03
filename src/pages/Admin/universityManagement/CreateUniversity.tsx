@@ -9,20 +9,15 @@ import { toast } from "sonner";
 import type { TResponse, TUniversity } from "../../../types";
 import { useAddUniversityMutation } from "../../../redux/features/admin/universityManagement.api";
 
-const dummyUniversityData = {
-  name: "University of Dhaka",
-  website: "https://www.du.ac.bd",
-  ranking: 601,
-  tuitionFees: 1500,
-};
-
 const CreateUniversity = () => {
   const { data: countryData } = useGetAllCountriesQuery(undefined);
   const [addUniversity] = useAddUniversityMutation();
-  const countryOptions = countryData?.data?.map((item) => ({
-    value: item._id,
-    label: item.name,
-  }));
+  const countryOptions = countryData?.data
+    ?.filter((item) => !item.isDeleted)
+    ?.map((item) => ({
+      value: item._id,
+      label: item.name,
+    }));
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Creating...");
     const universityData = {
@@ -49,7 +44,7 @@ const CreateUniversity = () => {
   return (
     <Flex justify="center" align="center">
       <Col span={24}>
-        <LBForm onSubmit={onSubmit} defaultValues={dummyUniversityData}>
+        <LBForm onSubmit={onSubmit}>
           <Row gutter={8}>
             <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
               <LBInput label="Name" type="text" name="name" />

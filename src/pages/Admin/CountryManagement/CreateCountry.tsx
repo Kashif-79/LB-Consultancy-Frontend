@@ -6,14 +6,6 @@ import { useAddCountryMutation } from "../../../redux/features/admin/CountryMana
 import type { TCountry, TResponse } from "../../../types";
 import { toast } from "sonner";
 
-const dummyCountryData = {
-  name: "Canada",
-  code: "CA",
-  continent: "North America",
-  currency: "Canadian Dollar",
-  language: "English, French",
-};
-
 const CreateCountry = () => {
   const [addCountry] = useAddCountryMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -38,7 +30,7 @@ const CreateCountry = () => {
   return (
     <Flex justify="center" align="center">
       <Col span={24}>
-        <LBForm onSubmit={onSubmit} defaultValues={dummyCountryData}>
+        <LBForm onSubmit={onSubmit}>
           <Row gutter={8}>
             <Col span={24} md={{ span: 24 }} lg={{ span: 24 }}>
               <LBInput label="Name" type="text" name="name" />

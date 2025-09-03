@@ -12,7 +12,7 @@ import type { TQueryParam } from "../../../types";
 import type { TService } from "../../../types/service.types";
 import { useGetAllServicesQuery } from "../../../redux/features/admin/serviceManagement.api";
 
-export type TTableData = Pick<TService, "name" | "definition" | "isActive">;
+export type TTableData = Pick<TService, "name" | "definition" | "description">;
 
 const ServiceData = () => {
   const [params, setParams] = useState<TQueryParam[]>([]);
@@ -32,11 +32,11 @@ const ServiceData = () => {
   const metaData = serviceData?.meta;
 
   const tableData = serviceData?.data?.map(
-    ({ _id, name, isActive, definition }) => ({
+    ({ _id, name, definition, description }) => ({
       key: _id,
       name,
-      isActive,
       definition,
+      description,
     })
   );
 
@@ -54,6 +54,10 @@ const ServiceData = () => {
           text: "Admission",
           value: "Admission",
         },
+        {
+          text: "Counseling",
+          value: "Counseling",
+        },
       ],
     },
     {
@@ -61,11 +65,11 @@ const ServiceData = () => {
       key: "definition",
       dataIndex: "definition",
     },
-    // {
-    //   title: "IsActive",
-    //   key: "isActive",
-    //   dataIndex: "isActive",
-    // },
+    {
+      title: "Description",
+      key: "description",
+      dataIndex: "description",
+    },
     {
       title: "Action",
       key: "x",
@@ -76,7 +80,6 @@ const ServiceData = () => {
             <Link to={`/admin/service-data/update/${item.key}`}>
               <Button>Update</Button>
             </Link>
-            <Button>Details</Button>
           </Space>
         );
       },
@@ -96,10 +99,6 @@ const ServiceData = () => {
       filters.name?.forEach((item) =>
         queryParams.push({ name: "name", value: item })
       );
-
-      //   filters.year?.forEach((item) =>
-      //     queryParams.push({ name: "year", value: item })
-      //   );
 
       setParams(queryParams);
     }

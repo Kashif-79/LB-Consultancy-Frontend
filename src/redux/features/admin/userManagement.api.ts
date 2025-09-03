@@ -31,6 +31,7 @@ const userManagementApi = baseApi.injectEndpoints({
           meta: response.meta,
         };
       },
+      providesTags: ["students"],
     }),
     getSingleStudent: builder.query({
       query: (stuId) => {
@@ -39,6 +40,7 @@ const userManagementApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
+      providesTags: ["students"],
     }),
     addStudent: builder.mutation({
       query: (data) => ({
@@ -46,6 +48,15 @@ const userManagementApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["students"],
+    }),
+    updateStudent: builder.mutation({
+      query: (args) => ({
+        url: `/students/${args.id}`,
+        method: "PATCH",
+        body: args.data,
+      }),
+      invalidatesTags: ["students"],
     }),
     getAllConsultants: builder.query({
       query: (args) => {
@@ -69,6 +80,16 @@ const userManagementApi = baseApi.injectEndpoints({
           meta: response.meta,
         };
       },
+      providesTags: ["consultants"],
+    }),
+    getSingleConsultant: builder.query({
+      query: (id) => {
+        return {
+          url: `/consultants/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["consultants"],
     }),
     addConsultant: builder.mutation({
       query: (data) => ({
@@ -76,6 +97,15 @@ const userManagementApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["consultants"],
+    }),
+    updateConsultants: builder.mutation({
+      query: (args) => ({
+        url: `/consultants/${args.id}`,
+        method: "PATCH",
+        body: args.data,
+      }),
+      invalidatesTags: ["consultants"],
     }),
     getAllAdmins: builder.query({
       query: (args) => {
@@ -99,6 +129,16 @@ const userManagementApi = baseApi.injectEndpoints({
           meta: response.meta,
         };
       },
+      providesTags: ["admins"],
+    }),
+    getSingleAdmin: builder.query({
+      query: (id) => {
+        return {
+          url: `/admins/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["admins"],
     }),
     addAdmin: builder.mutation({
       query: (data) => ({
@@ -106,6 +146,15 @@ const userManagementApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["admins"],
+    }),
+    updateAdmins: builder.mutation({
+      query: (args) => ({
+        url: `/admins/${args.id}`,
+        method: "PATCH",
+        body: args.data,
+      }),
+      invalidatesTags: ["admins"],
     }),
   }),
 });
@@ -114,8 +163,13 @@ export const {
   useAddStudentMutation,
   useGetAllStudentsQuery,
   useGetSingleStudentQuery,
+  useUpdateStudentMutation,
   useGetAllConsultantsQuery,
+  useGetSingleConsultantQuery,
   useAddConsultantMutation,
+  useUpdateConsultantsMutation,
   useGetAllAdminsQuery,
+  useGetSingleAdminQuery,
   useAddAdminMutation,
+  useUpdateAdminsMutation,
 } = userManagementApi;

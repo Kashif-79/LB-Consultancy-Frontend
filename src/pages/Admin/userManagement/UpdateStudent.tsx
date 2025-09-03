@@ -1,48 +1,60 @@
+import { useNavigate, useParams } from "react-router-dom";
 import {
-  //   Controller,
-  type FieldValues,
-  type SubmitHandler,
-} from "react-hook-form";
-import { Button, Col, Divider, Row } from "antd";
-import {
-  bloodGroupsOptions,
-  gendersOptions,
-  type TResponse,
-  type TStudent,
-} from "../../../types";
+  useGetSingleStudentQuery,
+  useUpdateStudentMutation,
+} from "../../../redux/features/admin/userManagement.api";
 import LBInput from "../../../components/form/LBInput";
 import LBSelect from "../../../components/form/LBSelect";
 import LBDatePicker from "../../../components/form/LBDatePicker";
 import LBForm from "../../../components/form/LBForm";
-import { useAddStudentMutation } from "../../../redux/features/admin/userManagement.api";
+import { Button, Col, Divider, Row } from "antd";
+import type { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
+import { bloodGroupsOptions, gendersOptions } from "../../../types";
 
-const CreateStudent = () => {
-  const [addStudent] = useAddStudentMutation();
+const UpdateStudent = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { data: student, refetch } = useGetSingleStudentQuery(id);
+  const [updateStudent] = useUpdateStudentMutation();
+
+  const studentData = {
+    name: student?.data?.name,
+    gender: student?.data?.gender,
+    bloodGroup: student?.data?.bloodGroup,
+    email: student?.data?.email,
+    contactNo: student?.data?.contactNo,
+    emergencyContactNo: student?.data?.emergencyContactNo,
+    presentAddress: student?.data?.presentAddress,
+    permanentAddress: student?.data?.permanentAddress,
+    profileImg: student?.data?.profileImg,
+    guardian: student?.data?.guardian,
+    localGuardian: student?.data?.localGuardian,
+  };
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const toastId = toast.loading("Creating...");
-    const studentData = {
-      password: "student123",
-      student: data,
+    const updateData = {
+      id,
+      data: {
+        student: data,
+      },
     };
+    const toastId = toast.loading("Updating...");
     try {
-      const res = (await addStudent(studentData)) as TResponse<TStudent>;
-      console.log(res);
-      if (res.error) {
-        toast.error(res.error.data.message, { id: toastId });
-      } else {
-        toast.success("Student created", { id: toastId });
-      }
-    } catch (err) {
-      toast.error("Something went wrong", { id: toastId });
+      await updateStudent(updateData);
+      refetch();
+      navigate(-1);
+      toast.success("Student updated successfully", { id: toastId });
+    } catch (err: any) {
+      toast.error(err?.data?.message ?? "Update failed", { id: toastId });
     }
+    console.log("updateData", updateData);
   };
 
   return (
     <Row>
       <Col span={24}>
-        <LBForm onSubmit={onSubmit}>
+        <LBForm onSubmit={onSubmit} defaultValues={studentData}>
           <Divider>Personal Info</Divider>
           <Row gutter={8}>
             <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
@@ -205,4 +217,4 @@ const CreateStudent = () => {
   );
 };
 
-export default CreateStudent;
+export default UpdateStudent;

@@ -1,10 +1,11 @@
 import { useParams } from "react-router-dom";
-import { useGetSingleStudentQuery } from "../../../redux/features/admin/userManagement.api";
+import { useGetSingleConsultantQuery } from "../../../redux/features/admin/userManagement.api";
 import { Card, Descriptions, Spin } from "antd";
 
-const StudentDetails = () => {
-  const { stuId } = useParams();
-  const { data, isLoading } = useGetSingleStudentQuery(stuId);
+const ConsultantsDetails = () => {
+  const { id } = useParams();
+  const { data, isLoading } = useGetSingleConsultantQuery(id);
+
   if (isLoading) {
     return (
       <div
@@ -41,4 +42,4 @@ const StudentDetails = () => {
   );
 };
 
-export default StudentDetails;
+export default ConsultantsDetails;

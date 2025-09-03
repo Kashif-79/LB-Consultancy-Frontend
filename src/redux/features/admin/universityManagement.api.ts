@@ -25,6 +25,7 @@ const universityManagementApi = baseApi.injectEndpoints({
           meta: response.meta,
         };
       },
+      providesTags: ["universities"],
     }),
     addUniversity: builder.mutation({
       query: (data) => ({
@@ -32,9 +33,30 @@ const universityManagementApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["universities"],
+    }),
+    getSingleUniversity: builder.query({
+      query: (id) => {
+        return {
+          url: `/universities/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["universities"],
+    }),
+    deleteSingleUniversity: builder.mutation({
+      query: (id) => ({
+        url: `/universities/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["universities"],
     }),
   }),
 });
 
-export const { useGetAllUniversitiesQuery, useAddUniversityMutation } =
-  universityManagementApi;
+export const {
+  useGetAllUniversitiesQuery,
+  useAddUniversityMutation,
+  useGetSingleUniversityQuery,
+  useDeleteSingleUniversityMutation,
+} = universityManagementApi;
