@@ -3,15 +3,21 @@ import { useGetAllUniversitiesQuery } from "../../../redux/features/admin/univer
 import CardSection from "../../../components/ui/PublicLayoutComponents/CardSection";
 import HeaderSection from "../../../components/ui/PublicLayoutComponents/HeaderSection";
 import SectionTitle from "../../../components/ui/PublicLayoutComponents/SectionTitle";
+import { BankOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
 const Universities = () => {
   const { data: universities } = useGetAllUniversitiesQuery(undefined);
+  const navigate = useNavigate();
   const cards = universities?.data
     ?.filter((university) => !university.isDeleted)
     .map((university) => ({
+      key: university._id,
       title: university.name,
       description: university?.name,
-      // image: university.name,
+      icon: <BankOutlined />,
+      id: university._id,
+      onClick: () => navigate(`/university/${university._id}`),
     }));
   return (
     <div>

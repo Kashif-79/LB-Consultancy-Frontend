@@ -19,13 +19,6 @@ const Home = () => {
       onClick: () => navigate(`/country/${country._id}`),
     }));
 
-  // const countryData = countries?.data
-  //   ?.filter((country) => !country.isDeleted)
-  //   .map((country) => ({
-  //     id: country._id,
-  //   }));
-  // console.log(countryData);
-
   return (
     <div>
       <section>

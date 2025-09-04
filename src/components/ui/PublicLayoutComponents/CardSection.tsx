@@ -9,6 +9,7 @@ type CardItem = {
   image?: string;
   _id?: string;
   onClick?: () => void;
+  icon?: React.ReactNode;
 };
 
 type CardSectionProps = {
@@ -48,6 +49,12 @@ const CardSection: React.FC<CardSectionProps> = ({
                 padding: "20px",
               }}
             >
+              {card.icon && (
+                <div style={{ fontSize: "40px", marginBottom: "16px" }}>
+                  {card.icon}
+                </div>
+              )}
+
               <div style={{ justifyItems: "center", textAlign: "center" }}>
                 <Title level={2}>Study in {card.title}</Title>
                 <Paragraph style={{ fontSize: "clamp(14px, 2vw, 18px)" }}>

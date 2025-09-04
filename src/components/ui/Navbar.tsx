@@ -3,12 +3,14 @@ import { Layout, Menu, Button, Drawer, Grid } from "antd";
 import { DownOutlined, MenuOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
 import { useGetAllCountriesQuery } from "../../redux/features/admin/CountryManagement.api";
+import { useGetAllServicesQuery } from "../../redux/features/admin/serviceManagement.api";
 
 const { Header } = Layout;
 const { useBreakpoint } = Grid;
 
 const Navbar = () => {
   const { data: country } = useGetAllCountriesQuery(undefined);
+  const { data: service } = useGetAllServicesQuery(undefined);
   const [open, setOpen] = useState(false);
   const screens = useBreakpoint();
 
@@ -29,6 +31,22 @@ const Navbar = () => {
           </NavLink>
         ),
       })) || [];
+
+  const serviceOptions =
+    service?.data?.map((item) => ({
+      key: `service-${item._id}`,
+      label: (
+        <NavLink
+          to={`/service/${item._id}`}
+          style={{
+            fontWeight: "normal",
+            fontSize: screens.md ? "18px" : "14px",
+          }}
+        >
+          {item.name}
+        </NavLink>
+      ),
+    })) || [];
 
   const menuItems = [
     { key: "home", label: <NavLink to="/">Home</NavLink> },
@@ -54,6 +72,24 @@ const Navbar = () => {
       ),
       children: countryOptions,
     },
+    {
+      key: "services",
+      label: (
+        <span
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <div>Our Services</div>
+          <div>
+            <DownOutlined />
+          </div>
+        </span>
+      ),
+      children: serviceOptions,
+    },
   ];
 
   return (
@@ -62,7 +98,6 @@ const Navbar = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-around",
-        // padding: "0 20px",
         background: "#fff",
         boxShadow: "0 2px 8px #f0f1f2",
       }}
@@ -75,7 +110,6 @@ const Navbar = () => {
             marginRight: screens.md ? "32px" : "10px",
             whiteSpace: "nowrap",
             color: "#318fe7ff",
-            // boxShadow: "0 2px 8px #f0f1f2",
           }}
         >
           LB Consultancy
