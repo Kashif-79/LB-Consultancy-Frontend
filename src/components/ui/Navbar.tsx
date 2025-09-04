@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Layout, Menu, Button, Drawer, Grid } from "antd";
 import { DownOutlined, MenuOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
-// import { useGetAllServicesQuery } from "../../redux/features/admin/serviceManagement.api";
 import { useGetAllCountriesQuery } from "../../redux/features/admin/CountryManagement.api";
 
 const { Header } = Layout;

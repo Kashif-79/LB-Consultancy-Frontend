@@ -7,6 +7,8 @@ type CardItem = {
   title: string;
   description?: string;
   image?: string;
+  _id?: string;
+  onClick?: () => void;
 };
 
 type CardSectionProps = {
@@ -55,12 +57,14 @@ const CardSection: React.FC<CardSectionProps> = ({
 
               {variant === "home" && (
                 <Button
+                  onClick={card.onClick}
                   type="primary"
                   block
                   style={{
                     margin: "16px 5px",
-                    padding: "10px 10px",
+                    padding: "15px 10px",
                     fontSize: "16px",
+                    fontWeight: "bold",
                   }}
                 >
                   Learn More

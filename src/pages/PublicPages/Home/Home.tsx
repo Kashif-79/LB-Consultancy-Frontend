@@ -4,15 +4,28 @@ import { Button } from "antd";
 import HeaderSection from "../../../components/ui/PublicLayoutComponents/HeaderSection";
 import SectionTitle from "../../../components/ui/PublicLayoutComponents/SectionTitle";
 import CardSection from "../../../components/ui/PublicLayoutComponents/CardSection";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 const Home = () => {
   const { data: countries } = useGetAllCountriesQuery(undefined);
+  const navigate = useNavigate();
+  console.log(countries);
   const cards = countries?.data
     ?.filter((country) => !country.isDeleted)
     .map((country) => ({
       title: country.name,
       description: `Study in the ${country.name} and experience a world-renowned education system. The ${country.name} is an ideal destination for students.`,
+      id: country._id,
+      onClick: () => navigate(`/country/${country._id}`),
     }));
+
+  // const countryData = countries?.data
+  //   ?.filter((country) => !country.isDeleted)
+  //   .map((country) => ({
+  //     id: country._id,
+  //   }));
+  // console.log(countryData);
+
   return (
     <div>
       <section>
@@ -25,6 +38,7 @@ const Home = () => {
           description="Build Your Dream Career with World-Class Education
          and Innovative Programs at Top Destinations Like the UK, Australia, Finland, Sweden, Denmark, and Germany!"
         />
+
         <CardSection cards={cards || []} variant="home" />
       </section>
       <section

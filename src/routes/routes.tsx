@@ -11,7 +11,6 @@ import { consultantPaths } from "./consultant.routes";
 import Universities from "../pages/PublicPages/Universities/Universities";
 import CountryDetails from "../pages/PublicPages/Country/CountryDetails";
 import Eligibility from "../pages/PublicPages/Eligibility/Eligibility";
-// import OurServiceData from "../pages/PublicPages/Service/OurServiceData";
 
 const router = createBrowserRouter([
   {

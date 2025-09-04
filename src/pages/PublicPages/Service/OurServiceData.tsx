@@ -31,20 +31,6 @@
 //           </div>
 //         </Col>
 //       </Row>
-//       <Footer
-//         style={{
-//           background: "#72ade4ff",
-//           color: "white",
-//           textAlign: "center",
-//         }}
-//       >
-//         <Title level={4} style={{ color: "white" }}>
-//           LB Consultancy
-//         </Title>
-//         <Text style={{ color: "#ccc" }}>
-//           © {new Date().getFullYear()} All Rights Reserved.
-//         </Text>
-//       </Footer>
 //     </div>
 //   );
 // };

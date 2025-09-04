@@ -6,11 +6,13 @@ import SectionTitle from "../../../components/ui/PublicLayoutComponents/SectionT
 
 const Universities = () => {
   const { data: universities } = useGetAllUniversitiesQuery(undefined);
-  const cards = universities?.data?.map((university) => ({
-    title: university.name,
-    description: university?.name,
-    // image: university.name,
-  }));
+  const cards = universities?.data
+    ?.filter((university) => !university.isDeleted)
+    .map((university) => ({
+      title: university.name,
+      description: university?.name,
+      // image: university.name,
+    }));
   return (
     <div>
       <HeaderSection
