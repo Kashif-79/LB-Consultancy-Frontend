@@ -6,6 +6,14 @@ import SectionTitle from "../../../components/ui/PublicLayoutComponents/SectionT
 import CardSection from "../../../components/ui/PublicLayoutComponents/CardSection";
 import { Link, useNavigate } from "react-router-dom";
 
+import { Row, Col, Card } from "antd";
+import {
+  BankOutlined,
+  FileSearchOutlined,
+  TeamOutlined,
+  BookOutlined,
+} from "@ant-design/icons";
+
 const Home = () => {
   const { data: countries } = useGetAllCountriesQuery(undefined);
   const navigate = useNavigate();
@@ -18,6 +26,29 @@ const Home = () => {
       id: country._id,
       onClick: () => navigate(`/country/${country._id}`),
     }));
+
+  const services = [
+    {
+      icon: <TeamOutlined style={{ fontSize: 28, color: "#1a1a2e" }} />,
+      title: "University Admission Support",
+      desc: "Obtain your university admission with our comprehensive guidance",
+    },
+    {
+      icon: <BankOutlined style={{ fontSize: 28, color: "#1a1a2e" }} />,
+      title: "Finance Application Support",
+      desc: "Navigate financial applications effortlessly with our expert support",
+    },
+    {
+      icon: <FileSearchOutlined style={{ fontSize: 28, color: "#1a1a2e" }} />,
+      title: "Visa Application Support",
+      desc: "Simplify visa applications with our comprehensive support and guidance",
+    },
+    {
+      icon: <BookOutlined style={{ fontSize: 28, color: "#1a1a2e" }} />,
+      title: "IELTS 360",
+      desc: "Boost your confidence & proficiency with our specialized IELTS program",
+    },
+  ];
 
   return (
     <div>
@@ -56,6 +87,49 @@ const Home = () => {
               Check Your Eligibility
             </Button>
           </Link>
+        </div>
+      </section>
+      <section>
+        <div style={{ padding: "40px 20px", background: "#fafafa" }}>
+          <h2 style={{ fontWeight: 700, marginBottom: 24 }}>OUR SERVICES</h2>
+
+          <Row gutter={[32, 32]} align="middle">
+            {/* Left side - Image/Video */}
+            <Col xs={24} md={12}>
+              <div style={{ borderRadius: 12, overflow: "hidden" }}>
+                <iframe
+                  width="100%"
+                  height="300"
+                  src="https://www.youtube.com/embed/yourVideoId"
+                  title="Study Abroad"
+                  frameBorder="0"
+                  allowFullScreen
+                />
+              </div>
+            </Col>
+
+            {/* Right side - Services list */}
+            <Col xs={24} md={12}>
+              {services.map((service, idx) => (
+                <Card
+                  key={idx}
+                  bordered={false}
+                  style={{ marginBottom: 16, borderRadius: 12 }}
+                  bodyStyle={{
+                    display: "flex",
+                    gap: "16px",
+                    alignItems: "flex-start",
+                  }}
+                >
+                  {service.icon}
+                  <div>
+                    <h3 style={{ margin: 0, fontSize: 18 }}>{service.title}</h3>
+                    <p style={{ margin: 0, color: "#555" }}>{service.desc}</p>
+                  </div>
+                </Card>
+              ))}
+            </Col>
+          </Row>
         </div>
       </section>
     </div>
