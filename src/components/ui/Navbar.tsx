@@ -182,25 +182,9 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const screens = useBreakpoint();
 
-  const mockCountries = [
-    { _id: "1", name: "United States", isDeleted: false },
-    { _id: "2", name: "Canada", isDeleted: false },
-    { _id: "3", name: "United Kingdom", isDeleted: false },
-    { _id: "4", name: "Australia", isDeleted: false },
-    { _id: "5", name: "Germany", isDeleted: false },
-  ];
-
-  const mockServices = [
-    { _id: "1", name: "Visa Consultation" },
-    { _id: "2", name: "University Application" },
-    { _id: "3", name: "Document Preparation" },
-    { _id: "4", name: "IELTS/TOEFL Preparation" },
-    { _id: "5", name: "Scholarship Guidance" },
-  ];
-
   // Country dropdown
   const countryOptions =
-    mockCountries
+    country?.data
       ?.filter((item) => !item.isDeleted)
       ?.map((item) => ({
         key: `country-${item._id}`,
@@ -209,7 +193,7 @@ const Navbar = () => {
             to={`/country/${item._id}`}
             style={{
               fontWeight: "normal",
-              fontSize: screens.md ? "28px" : "14px",
+              fontSize: screens.md ? "22px" : "14px",
             }}
           >
             Study In {item.name}
@@ -219,14 +203,14 @@ const Navbar = () => {
 
   // Services dropdown
   const serviceOptions =
-    mockServices.map((item) => ({
+    service?.data?.map((item) => ({
       key: `service-${item._id}`,
       label: (
         <NavLink
           to={`/service/${item._id}`}
           style={{
             fontWeight: "normal",
-            fontSize: screens.md ? "18px" : "14px",
+            fontSize: screens.md ? "22px" : "14px",
           }}
         >
           {item.name}
