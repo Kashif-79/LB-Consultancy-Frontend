@@ -11,11 +11,13 @@ export type TUser = {
 type TAuthState = {
   user: null | TUser;
   token: null | string;
+  isLoading: boolean;
 };
 
 const initialState: TAuthState = {
   user: null,
   token: null,
+  isLoading: false,
 };
 
 const authSlice = createSlice({
@@ -26,10 +28,12 @@ const authSlice = createSlice({
       const { user, token } = action.payload;
       state.user = user;
       state.token = token;
+      state.isLoading = true;
     },
     logOut: (state) => {
       state.user = null;
       state.token = null;
+      state.isLoading = false;
     },
   },
 });

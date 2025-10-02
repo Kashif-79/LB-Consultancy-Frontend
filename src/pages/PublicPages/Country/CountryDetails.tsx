@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useGetSingleCountryQuery } from "../../../redux/features/admin/CountryManagement.api";
-import img from "../../../assets/images/d-panyukov-_4ZLmHzwARY-unsplash.jpg";
 import HeaderSection from "../../../components/ui/PublicLayoutComponents/HeaderSection";
 import SectionTitle from "../../../components/ui/PublicLayoutComponents/SectionTitle";
 import { Divider } from "antd";
@@ -8,7 +7,8 @@ import { Divider } from "antd";
 const CountryDetails = () => {
   const { id } = useParams();
   const { data: country } = useGetSingleCountryQuery(id);
-  console.log(country);
+  // console.log(country);
+  const img = "https://i.ibb.co.com/X1W0wGf/pexels-paultheodoroja-3493651.jpg";
   return (
     <div>
       <HeaderSection

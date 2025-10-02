@@ -16,7 +16,7 @@ const HeaderSection: React.FC<HeaderSectionProps> = ({
     <div
       style={{
         width: "100%",
-        height: "70vh",
+        height: "90vh",
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",

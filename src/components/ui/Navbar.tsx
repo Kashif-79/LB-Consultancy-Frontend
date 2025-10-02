@@ -1,182 +1,16 @@
-// import { useState } from "react";
-// import { Layout, Menu, Button, Drawer, Grid } from "antd";
-// import { DownOutlined, MenuOutlined } from "@ant-design/icons";
-// import { NavLink } from "react-router-dom";
-// import { useGetAllCountriesQuery } from "../../redux/features/admin/CountryManagement.api";
-// import { useGetAllServicesQuery } from "../../redux/features/admin/serviceManagement.api";
-
-// const { Header } = Layout;
-// const { useBreakpoint } = Grid;
-
-// const Navbar = () => {
-//   const { data: country } = useGetAllCountriesQuery(undefined);
-//   const { data: service } = useGetAllServicesQuery(undefined);
-//   console.log("Services:", service);
-//   const [open, setOpen] = useState(false);
-//   const screens = useBreakpoint();
-
-//   const countryOptions =
-//     country?.data
-//       ?.filter((item) => !item.isDeleted)
-//       .map((item) => ({
-//         key: `country-${item._id}`,
-//         label: (
-//           <NavLink
-//             to={`/country/${item._id}`}
-//             style={{
-//               fontWeight: "normal",
-//               fontSize: screens.md ? "18px" : "14px",
-//             }}
-//           >
-//             {`Study In ${item.name}`}
-//           </NavLink>
-//         ),
-//       })) || [];
-
-//   const serviceOptions =
-//     service?.data?.map((item) => ({
-//       key: `service-${item._id}`,
-//       label: (
-//         <NavLink
-//           to={`/service/${item._id}`}
-//           style={{
-//             fontWeight: "normal",
-//             fontSize: screens.md ? "18px" : "14px",
-//           }}
-//         >
-//           {item.name}
-//         </NavLink>
-//       ),
-//     })) || [];
-
-//   const menuItems = [
-//     { key: "home", label: <NavLink to="/">Home</NavLink> },
-//     {
-//       key: "universities",
-//       label: <NavLink to="/universities">Universities</NavLink>,
-//     },
-//     {
-//       key: "country",
-//       label: (
-//         <span
-//           style={{
-//             display: "flex",
-//             justifyContent: "space-between",
-//             alignItems: "center",
-//           }}
-//         >
-//           <div>Study Abroad</div>
-//           <div>
-//             <DownOutlined />
-//           </div>
-//         </span>
-//       ),
-//       children: countryOptions,
-//     },
-//     {
-//       key: "services",
-//       label: (
-//         <span
-//           style={{
-//             display: "flex",
-//             justifyContent: "space-between",
-//             alignItems: "center",
-//           }}
-//         >
-//           <div>Our Services</div>
-//           <div>
-//             <DownOutlined />
-//           </div>
-//         </span>
-//       ),
-//       children: serviceOptions,
-//     },
-//   ];
-
-//   return (
-//     <Header
-//       style={{
-//         display: "flex",
-//         alignItems: "center",
-//         justifyContent: "space-around",
-//         background: "#fff",
-//         boxShadow: "0 2px 8px #f0f1f2",
-//       }}
-//     >
-//       <div style={{ display: "flex", alignItems: "center", flex: 1 }}>
-//         <div
-//           style={{
-//             fontSize: screens.md ? "20px" : "16px",
-//             fontWeight: "bold",
-//             marginRight: screens.md ? "32px" : "10px",
-//             whiteSpace: "nowrap",
-//             color: "#318fe7ff",
-//           }}
-//         >
-//           LB Consultancy
-//         </div>
-
-//         {screens.md && (
-//           <Menu
-//             mode="horizontal"
-//             items={menuItems}
-//             style={{
-//               borderBottom: "none",
-//               flex: 1,
-//               fontSize: "20px",
-//             }}
-//             overflowedIndicator={null}
-//           />
-//         )}
-//       </div>
-
-//       {screens.md ? (
-//         <Button
-//           type="primary"
-//           style={{
-//             marginRight: "10px",
-//             fontSize: "15px",
-//           }}
-//         >
-//           <NavLink to="/login">Login</NavLink>
-//         </Button>
-//       ) : (
-//         <>
-//           <Button
-//             type="text"
-//             icon={<MenuOutlined />}
-//             onClick={() => setOpen(true)}
-//           />
-//           <Drawer
-//             title="Menu"
-//             placement="right"
-//             onClose={() => setOpen(false)}
-//             open={open}
-//           >
-//             <Menu mode="vertical" items={menuItems} />
-//             <Button type="primary" block style={{ marginTop: "16px" }}>
-//               <NavLink to="/login">Login</NavLink>
-//             </Button>
-//           </Drawer>
-//         </>
-//       )}
-//     </Header>
-//   );
-// };
-
-// export default Navbar;
-
 import { useState } from "react";
 import { Layout, Menu, Button, Drawer, Grid } from "antd";
 import { DownOutlined, MenuOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
 import { useGetAllCountriesQuery } from "../../redux/features/admin/CountryManagement.api";
 import { useGetAllServicesQuery } from "../../redux/features/admin/serviceManagement.api";
+import { useAppSelector } from "../../redux/hooks";
 
 const { Header } = Layout;
 const { useBreakpoint } = Grid;
 
 const Navbar = () => {
+  const {isLoggedIn }= useAppSelector()
   const { data: country } = useGetAllCountriesQuery(undefined);
   const { data: service } = useGetAllServicesQuery(undefined);
   const [open, setOpen] = useState(false);
@@ -334,7 +168,14 @@ const Navbar = () => {
           >
             <Menu mode="inline" items={menuItems} style={{ border: "none" }} />
             <div style={{ padding: "16px", borderTop: "1px solid #f0f0f0" }}>
-              <Button type="primary" block>
+              <Button
+                type="primary"
+                style={{
+                  fontSize: "15px",
+                  fontWeight: "500",
+                  height: "40px",
+                }}
+              >
                 <NavLink to="/login" style={{ color: "#fff" }}>
                   Login
                 </NavLink>

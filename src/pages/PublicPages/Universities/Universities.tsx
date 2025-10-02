@@ -1,4 +1,4 @@
-import img from "../../../assets/images/d-panyukov-_4ZLmHzwARY-unsplash.jpg";
+// import img from "../../../assets/images/d-panyukov-_4ZLmHzwARY-unsplash.jpg";
 import { useGetAllUniversitiesQuery } from "../../../redux/features/admin/universityManagement.api";
 import CardSection from "../../../components/ui/PublicLayoutComponents/CardSection";
 import HeaderSection from "../../../components/ui/PublicLayoutComponents/HeaderSection";
@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 const Universities = () => {
   const { data: universities } = useGetAllUniversitiesQuery(undefined);
   const navigate = useNavigate();
+  const img =
+    "https://i.ibb.co.com/gFXD3f67/pexels-philevenphotos-27772402.jpg";
   const cards = universities?.data
     ?.filter((university) => !university.isDeleted)
     .map((university) => ({
