@@ -12,7 +12,6 @@ import Universities from "../pages/PublicPages/Universities/Universities";
 import CountryDetails from "../pages/PublicPages/Country/CountryDetails";
 import UniversityDetails from "../pages/PublicPages/Universities/UniversityDetails";
 import OurServiceData from "../pages/PublicPages/Service/OurServiceData";
-// import Eligibility from "../pages/PublicPages/Eligibility/Eligibility";
 
 const router = createBrowserRouter([
   {
@@ -27,10 +26,6 @@ const router = createBrowserRouter([
             element: <Home />,
           },
           { path: "/universities", element: <Universities /> },
-          // {
-          //   path: "/eligibility",
-          //   element: <Eligibility />,
-          // },
           {
             path: "/country/:id",
             element: <CountryDetails />,

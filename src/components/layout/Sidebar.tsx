@@ -10,7 +10,8 @@ import { Link } from "react-router-dom";
 const { Sider } = Layout;
 
 const userRole = {
-  ADIMN: "admin",
+  SUPER_ADMIN: "superAdmin",
+  ADMIN: "admin",
   CONSULTANT: "consultant",
   STUDENT: "student",
 };
@@ -24,15 +25,12 @@ const Sidebar = () => {
   }
   let sideBarItems;
 
-  if (user?.role === userRole.ADIMN) {
-    sideBarItems = sidebarItemsGenerator(adminPaths, userRole.ADIMN);
+  if (user?.role === userRole.ADMIN || user?.role === userRole.SUPER_ADMIN) {
+    sideBarItems = sidebarItemsGenerator(adminPaths, userRole.ADMIN);
   }
   if (user?.role === userRole.CONSULTANT) {
     sideBarItems = sidebarItemsGenerator(consultantPaths, userRole.CONSULTANT);
   }
-  // if (user?.role === userRole.STUDENT) {
-  //   sideBarItems = sidebarItemsGenerator(studentPaths, userRole.STUDENT);
-  // }
 
   if (!user?.role) {
     return null;
