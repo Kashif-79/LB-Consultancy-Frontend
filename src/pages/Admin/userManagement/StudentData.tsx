@@ -11,7 +11,7 @@ import { useGetAllStudentsQuery } from "../../../redux/features/admin/userManage
 import { Link } from "react-router-dom";
 import type { TQueryParam, TStudent } from "../../../types";
 
-export type TTableData = Pick<TStudent, "email" | "contactNo" | "name">;
+export type TTableData = Pick<TStudent, "email" | "contactNo">;
 
 const StudentData = () => {
   const [params, setParams] = useState<TQueryParam[]>([]);
@@ -87,10 +87,6 @@ const StudentData = () => {
       filters.email?.forEach((item) =>
         queryParams.push({ name: "name", value: item })
       );
-
-      // filters.year?.forEach((item) =>
-      //   queryParams.push({ name: "year", value: item })
-      // );
 
       setParams(queryParams);
     }

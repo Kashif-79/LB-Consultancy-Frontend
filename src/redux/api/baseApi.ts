@@ -30,11 +30,22 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   DefinitionType
 > = async (arg, api, extraOptions): Promise<any> => {
   let result = await baseQuery(arg, api, extraOptions);
+  // if (result.error?.status === 404) {
+  //   toast.error(result.error?.data.message);
+  // }
+
   if (result.error?.status === 404) {
-    toast.error(result.error?.data.message);
+    const errorData = result.error.data as { message: string };
+    toast.error(errorData.message);
   }
+
+  // if (result.error?.status === 403) {
+  //   toast.error(result.error?.data.message);
+  // }
+
   if (result.error?.status === 403) {
-    toast.error(result.error?.data.message);
+    const errorData = result.error.data as { message: string };
+    toast.error(errorData.message);
   }
 
   if (result.error?.status === 401) {
