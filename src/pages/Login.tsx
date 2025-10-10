@@ -14,15 +14,9 @@ const Login = () => {
   const navigate = useNavigate();
   const disPatch = useAppDispatch();
 
-  const defaultValues = {
-    email: "khali2@gmail.com",
-    password: "A111",
-  };
-
   const [login] = useLoginMutation();
 
   const onSubmit = async (data: FieldValues) => {
-    console.log(data);
     const toastId = toast.loading("Logging in");
 
     try {
@@ -31,9 +25,8 @@ const Login = () => {
         password: data.password,
       };
       const res = await login(userInfo).unwrap();
-      console.log(res);
 
-      const user = verifyToken(res.data.accessToken) as TUser;
+      const user = verifyToken(res.data.accessToken) as unknown as TUser;
 
       disPatch(setUser({ user: user, token: res.data.accessToken }));
       toast.success("Logged In", { id: toastId, duration: 2000 });
@@ -57,15 +50,13 @@ const Login = () => {
           borderRadius: "8px",
         }}
       >
-        <LBForm onSubmit={onSubmit} defaultValues={defaultValues}>
+        <LBForm onSubmit={onSubmit}>
           <LBInput type="text" name="email" label="email" />
           <LBInput type="text" name="password" label="Password" />
           <Button htmlType="submit">Login</Button>
         </LBForm>
       </div>
     </Row>
-
-   
   );
 };
 

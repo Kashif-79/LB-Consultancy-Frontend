@@ -4,11 +4,9 @@ import CardSection from "../../../components/ui/PublicLayoutComponents/CardSecti
 import HeaderSection from "../../../components/ui/PublicLayoutComponents/HeaderSection";
 import SectionTitle from "../../../components/ui/PublicLayoutComponents/SectionTitle";
 import { BankOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
 
 const Universities = () => {
   const { data: universities } = useGetAllUniversitiesQuery(undefined);
-  const navigate = useNavigate();
   const img =
     "https://i.ibb.co.com/gFXD3f67/pexels-philevenphotos-27772402.jpg";
   const cards = universities?.data
@@ -19,7 +17,13 @@ const Universities = () => {
       description: university?.name,
       icon: <BankOutlined />,
       id: university._id,
-      onClick: () => navigate(`/university/${university._id}`),
+      onClick: () => {
+        if (university.website) {
+          window.open(university.website, "_blank"); // ✅ opens in new tab
+        } else {
+          console.warn("No website found for this university.");
+        }
+      },
     }));
   return (
     <div>

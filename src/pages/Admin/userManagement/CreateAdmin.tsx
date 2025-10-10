@@ -17,22 +17,6 @@ import LBForm from "../../../components/form/LBForm";
 import { useAddAdminMutation } from "../../../redux/features/admin/userManagement.api";
 import { toast } from "sonner";
 
-const AdminDefaultValue = {
-  name: {
-    firstName: "Kashif",
-    middleName: "Ahmed",
-    lastName: "Hossain",
-  },
-  gender: "male",
-  email: "kashif@example.com",
-  contactNo: "+8801712345678",
-  emergencyContactNo: "+8801987654321",
-  bloodGroup: "B+",
-  presentAddress: "123 Green Road, Dhaka, Bangladesh",
-  permanentAddress: "Village Road, Cumilla, Bangladesh",
-  isDeleted: false,
-};
-
 const CreateAdmin = () => {
   const [addAdmin] = useAddAdminMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -58,7 +42,7 @@ const CreateAdmin = () => {
   return (
     <Row>
       <Col span={24}>
-        <LBForm onSubmit={onSubmit} defaultValues={AdminDefaultValue}>
+        <LBForm onSubmit={onSubmit}>
           <Divider>Personal Info</Divider>
           <Row gutter={8}>
             <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>

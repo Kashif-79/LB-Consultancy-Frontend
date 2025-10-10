@@ -10,7 +10,6 @@ import PublicLayout from "../components/layout/PublicLayout";
 import { consultantPaths } from "./consultant.routes";
 import Universities from "../pages/PublicPages/Universities/Universities";
 import CountryDetails from "../pages/PublicPages/Country/CountryDetails";
-import UniversityDetails from "../pages/PublicPages/Universities/UniversityDetails";
 import OurServiceData from "../pages/PublicPages/Service/OurServiceData";
 
 const router = createBrowserRouter([
@@ -33,10 +32,6 @@ const router = createBrowserRouter([
           {
             path: "/service/:id",
             element: <OurServiceData />,
-          },
-          {
-            path: "/university/:id",
-            element: <UniversityDetails />,
           },
         ],
       },

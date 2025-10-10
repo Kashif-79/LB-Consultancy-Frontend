@@ -15,9 +15,7 @@ const { useBreakpoint } = Grid;
 
 const Navbar = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
-  console.log("Is Logged In:", isLoggedIn);
   const user = useAppSelector(selectCurrentUser);
-  console.log("Current User:", user);
   const { data: country } = useGetAllCountriesQuery(undefined);
   const { data: service } = useGetAllServicesQuery(undefined);
   const [open, setOpen] = useState(false);
@@ -150,8 +148,11 @@ const Navbar = () => {
             height: "40px",
           }}
         >
-          <NavLink to="/login" style={{ color: "#fff" }}>
-            Login
+          <NavLink
+            to={isLoggedIn ? `/${user?.role}/dashboard` : "/login"}
+            style={{ color: "#fff" }}
+          >
+            {isLoggedIn ? "Dashboard" : "Admin Login"}
           </NavLink>
         </Button>
       ) : (
@@ -184,12 +185,10 @@ const Navbar = () => {
                 }}
               >
                 <NavLink
-                  to={
-                    isLoggedIn ? `/dashboard/${user?.role || "user"}` : "/login"
-                  }
+                  to={isLoggedIn ? `/${user?.role}/dashboard` : "/login"}
                   style={{ color: "#fff" }}
                 >
-                  {/* {isLoggedIn ? "Dashboard" : "Login"} */}
+                  {isLoggedIn ? "Dashboard" : "Admin Login"}
                 </NavLink>
               </Button>
             </div>
