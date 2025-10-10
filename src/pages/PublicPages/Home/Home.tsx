@@ -10,6 +10,7 @@ import {
   FileSearchOutlined,
   TeamOutlined,
 } from "@ant-design/icons";
+import SuccessSection from "../../../components/ui/PublicLayoutComponents/SuccessSection";
 
 const Home = () => {
   const { data: countries } = useGetAllCountriesQuery(undefined);
@@ -58,7 +59,6 @@ const Home = () => {
           description="Build Your Dream Career with World-Class Education
          and Innovative Programs at Top Destinations Like the UK, Australia, Finland, Sweden, Denmark, and Germany!"
         />
-
         <CardSection cards={cards || []} variant="home" />
       </section>
       <section
@@ -114,6 +114,7 @@ const Home = () => {
           </Row>
         </div>
       </section>
+      <SuccessSection />
     </div>
   );
 };
