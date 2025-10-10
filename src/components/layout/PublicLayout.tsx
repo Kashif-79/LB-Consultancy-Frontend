@@ -11,7 +11,7 @@ function PublicLayout() {
       <Navbar />
       <Content
         style={{
-          flex: 1, // Allow Content to stretch and fill the remaining space
+          flex: 1,
           padding: 24,
         }}
       >
@@ -30,6 +30,9 @@ function PublicLayout() {
         <Text style={{ color: "#ccc" }}>
           © {new Date().getFullYear()} All Rights Reserved.
         </Text>
+        <Title level={5} style={{ color: "white" }}>
+          Designed and Developed by Kashif.r.reza@gmail.com
+        </Title>
       </Footer>
     </Layout>
   );

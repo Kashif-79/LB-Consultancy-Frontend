@@ -4,13 +4,20 @@ import { DownOutlined, MenuOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
 import { useGetAllCountriesQuery } from "../../redux/features/admin/CountryManagement.api";
 import { useGetAllServicesQuery } from "../../redux/features/admin/serviceManagement.api";
-// import { useAppSelector } from "../../redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
+import {
+  selectCurrentUser,
+  selectIsLoggedIn,
+} from "../../redux/features/auth/authSlice";
 
 const { Header } = Layout;
 const { useBreakpoint } = Grid;
 
 const Navbar = () => {
-  // const {isLoggedIn }= useAppSelector()
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  console.log("Is Logged In:", isLoggedIn);
+  const user = useAppSelector(selectCurrentUser);
+  console.log("Current User:", user);
   const { data: country } = useGetAllCountriesQuery(undefined);
   const { data: service } = useGetAllServicesQuery(undefined);
   const [open, setOpen] = useState(false);
@@ -176,8 +183,13 @@ const Navbar = () => {
                   height: "40px",
                 }}
               >
-                <NavLink to="/login" style={{ color: "#fff" }}>
-                  Login
+                <NavLink
+                  to={
+                    isLoggedIn ? `/dashboard/${user?.role || "user"}` : "/login"
+                  }
+                  style={{ color: "#fff" }}
+                >
+                  {/* {isLoggedIn ? "Dashboard" : "Login"} */}
                 </NavLink>
               </Button>
             </div>

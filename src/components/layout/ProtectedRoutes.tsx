@@ -24,7 +24,6 @@ const ProtectedRoute = ({ children, role }: TProtectedRoutes) => {
   }
 
   if (!token) {
-    // Redirect to login, saving the current location they were trying to access
     return <Navigate to="/login" replace={true} />;
   }
 

@@ -11,7 +11,7 @@ import type { DefinitionType } from "@reduxjs/toolkit/query";
 import { toast } from "sonner";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:5000/api/v1",
+  baseUrl: "https://lb-consultancy-production.up.railway.app/api/v1",
   credentials: "include",
   prepareHeaders: (headeres, { getState }) => {
     const token = (getState() as RootState).auth.token;
@@ -30,18 +30,10 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   DefinitionType
 > = async (arg, api, extraOptions): Promise<any> => {
   let result = await baseQuery(arg, api, extraOptions);
-  // if (result.error?.status === 404) {
-  //   toast.error(result.error?.data.message);
-  // }
-
   if (result.error?.status === 404) {
     const errorData = result.error.data as { message: string };
     toast.error(errorData.message);
   }
-
-  // if (result.error?.status === 403) {
-  //   toast.error(result.error?.data.message);
-  // }
 
   if (result.error?.status === 403) {
     const errorData = result.error.data as { message: string };
@@ -49,10 +41,13 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   }
 
   if (result.error?.status === 401) {
-    const res = await fetch("http://localhost:5000/api/v1/auth/refresh-token", {
-      method: "POST",
-      credentials: "include",
-    });
+    const res = await fetch(
+      "https://lb-consultancy-production.up.railway.app/refresh-token",
+      {
+        method: "POST",
+        credentials: "include",
+      }
+    );
     const data = await res.json();
 
     if (data?.data?.accessToken) {

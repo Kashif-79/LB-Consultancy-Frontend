@@ -21,9 +21,11 @@ const CreateUniversity = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Creating...");
     const universityData = {
-      ...data,
-      ranking: Number(data.ranking),
-      tuitionFees: Number(data.tuitionFees),
+      university: {
+        ...data,
+        ranking: Number(data.ranking),
+        tuitionFees: Number(data.tuitionFees),
+      },
     };
     try {
       const res = (await addUniversity(

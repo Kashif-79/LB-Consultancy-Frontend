@@ -12,6 +12,7 @@ type TAuthState = {
   user: null | TUser;
   token: null | string;
   isLoading: boolean;
+  isLoggedIn?: boolean;
 };
 
 const initialState: TAuthState = {
@@ -29,11 +30,13 @@ const authSlice = createSlice({
       state.user = user;
       state.token = token;
       state.isLoading = true;
+      state.isLoggedIn = true;
     },
     logOut: (state) => {
       state.user = null;
       state.token = null;
       state.isLoading = false;
+      state.isLoggedIn = false;
     },
   },
 });
@@ -42,3 +45,4 @@ export const { setUser, logOut } = authSlice.actions;
 export default authSlice.reducer;
 export const useCurrentToken = (state: RootState) => state.auth.token;
 export const selectCurrentUser = (state: RootState) => state.auth.user;
+export const selectIsLoggedIn = (state: RootState) => state.auth.isLoggedIn;
