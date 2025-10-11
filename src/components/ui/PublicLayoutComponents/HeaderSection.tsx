@@ -16,10 +16,13 @@ const HeaderSection: React.FC<HeaderSectionProps> = ({
     <div
       style={{
         width: "100%",
-        height: "90vh",
-        backgroundImage: `url(${backgroundImage})`,
+        minHeight: "70vh",
+        aspectRatio: "16/9",
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "scroll",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -27,31 +30,21 @@ const HeaderSection: React.FC<HeaderSectionProps> = ({
         padding: "0 20px",
         color: "#fff",
         position: "relative",
+        overflow: "hidden",
       }}
     >
-      <div
+      <Title
+        level={1}
         style={{
-          alignContent: "center",
-          position: "absolute",
-          inset: 0,
-          backgroundColor: "rgba(0,0,0,0.3)",
+          color: "white",
+          fontWeight: "bold",
+          fontSize: "clamp(24px, 5vw, 48px)",
+          textShadow: "2px 2px 6px rgba(0, 0, 0, 0.38)",
+          margin: 0,
         }}
       >
-        <Title
-          level={1}
-          style={{
-            boxShadow: "0 2px 10px rgba(248, 224, 224, 0.5)",
-            color: "white",
-            fontWeight: "bold",
-            zIndex: 1,
-            fontSize: "clamp(24px, 5vw, 48px)",
-            textShadow: "2px 2px 6px rgba(0, 0, 0, 0.38)",
-            margin: 0,
-          }}
-        >
-          {title}
-        </Title>
-      </div>
+        {title}
+      </Title>
     </div>
   );
 };
