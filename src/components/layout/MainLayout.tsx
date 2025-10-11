@@ -28,7 +28,7 @@ function MainLayout() {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            background: "#fff",
+            background: "transparent",
             padding: "0 20px",
             boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
           }}
@@ -58,8 +58,7 @@ function MainLayout() {
             style={{
               padding: 24,
               minHeight: 360,
-              background: "#fff",
-              borderRadius: 8,
+              background: "transparent",
             }}
           >
             <Outlet />

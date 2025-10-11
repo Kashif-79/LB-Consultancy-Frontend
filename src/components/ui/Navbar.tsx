@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Layout, Menu, Button, Drawer, Grid } from "antd";
 import { DownOutlined, MenuOutlined } from "@ant-design/icons";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useGetAllCountriesQuery } from "../../redux/features/admin/CountryManagement.api";
 import { useGetAllServicesQuery } from "../../redux/features/admin/serviceManagement.api";
 import { useAppSelector } from "../../redux/hooks";
@@ -111,16 +111,41 @@ const Navbar = () => {
       <div style={{ display: "flex", alignItems: "center", flex: 1 }}>
         <div
           style={{
-            fontSize: screens.md ? "20px" : "16px",
-            fontWeight: "bold",
-            marginRight: screens.md ? "32px" : "10px",
-            whiteSpace: "nowrap",
-            color: "#1677ff",
+            textAlign: "center",
+            height: "4rem",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            background: "rgba(255, 255, 255, 0.05)",
           }}
         >
-          <NavLink to="/" style={{ color: "#1677ff" }}>
-            LB Consultancy
-          </NavLink>
+          <Link
+            to="/"
+            style={{
+              textDecoration: "none",
+            }}
+          >
+            <h1
+              style={{
+                fontSize: "22px",
+                fontWeight: 700,
+                margin: 0,
+                letterSpacing: "0.5px",
+                background: "linear-gradient(90deg, #40a9ff, #69c0ff, #096dd9)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                transition: "transform 0.3s ease",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.transform = "scale(1.05)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.transform = "scale(1)")
+              }
+            >
+              LB Consultancy
+            </h1>
+          </Link>
         </div>
 
         {/* Desktop Menu */}

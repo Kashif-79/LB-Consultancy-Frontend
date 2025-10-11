@@ -40,22 +40,51 @@ const Sidebar = () => {
     <Sider
       breakpoint="lg"
       collapsedWidth="0"
-      style={{ height: "100vh", position: "sticky", top: "0", left: "0" }}
+      style={{
+        height: "100vh",
+        position: "sticky",
+        top: "0",
+        left: "0",
+        background: "#001529",
+      }}
     >
       <div
         style={{
-          color: "white",
           textAlign: "center",
           height: "4rem",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          background: "rgba(255, 255, 255, 0.05)",
         }}
       >
-        <Link to="/">
-          <h1>LB Consultancy</h1>
+        <Link
+          to="/"
+          style={{
+            textDecoration: "none",
+          }}
+        >
+          <h1
+            style={{
+              fontSize: "22px",
+              fontWeight: 700,
+              margin: 0,
+              letterSpacing: "0.5px",
+              background: "linear-gradient(90deg, #40a9ff, #69c0ff, #096dd9)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              transition: "transform 0.3s ease",
+            }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.transform = "scale(1.05)")
+            }
+            onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+          >
+            LB Consultancy
+          </h1>
         </Link>
       </div>
+
       <Menu
         theme="dark"
         mode="inline"
