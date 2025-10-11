@@ -21,6 +21,11 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const screens = useBreakpoint();
 
+  // Helper: close drawer on click
+  const handleMenuClick = () => {
+    setOpen(false);
+  };
+
   // Country dropdown
   const countryOptions =
     country?.data
@@ -30,6 +35,7 @@ const Navbar = () => {
         label: (
           <NavLink
             to={`/country/${item._id}`}
+            onClick={handleMenuClick}
             style={{
               fontWeight: "normal",
               fontSize: screens.md ? "22px" : "14px",
@@ -47,6 +53,7 @@ const Navbar = () => {
       label: (
         <NavLink
           to={`/service/${item._id}`}
+          onClick={handleMenuClick}
           style={{
             fontWeight: "normal",
             fontSize: screens.md ? "22px" : "14px",
@@ -58,10 +65,21 @@ const Navbar = () => {
     })) || [];
 
   const menuItems = [
-    { key: "home", label: <NavLink to="/">Home</NavLink> },
+    {
+      key: "home",
+      label: (
+        <NavLink to="/" onClick={handleMenuClick}>
+          Home
+        </NavLink>
+      ),
+    },
     {
       key: "universities",
-      label: <NavLink to="/universities">Universities</NavLink>,
+      label: (
+        <NavLink to="/universities" onClick={handleMenuClick}>
+          Universities
+        </NavLink>
+      ),
     },
     {
       key: "country",
@@ -96,6 +114,7 @@ const Navbar = () => {
       children: serviceOptions,
     },
   ];
+
   return (
     <Header
       style={{
@@ -121,9 +140,8 @@ const Navbar = () => {
         >
           <Link
             to="/"
-            style={{
-              textDecoration: "none",
-            }}
+            onClick={handleMenuClick}
+            style={{ textDecoration: "none" }}
           >
             <h1
               style={{
@@ -199,7 +217,13 @@ const Navbar = () => {
               body: { padding: 0 },
             }}
           >
-            <Menu mode="inline" items={menuItems} style={{ border: "none" }} />
+            {/* 👇 When a menu item is clicked, drawer auto-closes */}
+            <Menu
+              mode="inline"
+              items={menuItems}
+              style={{ border: "none" }}
+              onClick={handleMenuClick}
+            />
             <div style={{ padding: "16px", borderTop: "1px solid #f0f0f0" }}>
               <Button
                 type="primary"
@@ -207,7 +231,9 @@ const Navbar = () => {
                   fontSize: "15px",
                   fontWeight: "500",
                   height: "40px",
+                  width: "100%",
                 }}
+                onClick={handleMenuClick}
               >
                 <NavLink
                   to={isLoggedIn ? `/${user?.role}/dashboard` : "/login"}
